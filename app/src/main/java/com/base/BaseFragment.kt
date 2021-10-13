@@ -11,15 +11,18 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.base.dialogs.CustomProgressDialog
+import com.zaka.R
 import com.zaka.base.extensions.getDrawableCompat
 import com.zaka.base.extensions.hide
 import com.zaka.databinding.FragmentBaseBinding
+import com.zaka.databinding.FragmentReportsBinding
 
 abstract  class BaseFragment : Fragment() {
 
-    abstract fun inflateBinding(inflateId:View)
+    @LayoutRes
+    abstract fun layoutResource(): Int
 
-    lateinit var binding : FragmentBaseBinding
+     lateinit var binding : FragmentBaseBinding
 
     lateinit var progressDialog: CustomProgressDialog
 
@@ -30,27 +33,19 @@ abstract  class BaseFragment : Fragment() {
     ): View? {
         //   inflater.inflate(R.layout.fragment_base, container, false)
         binding = FragmentBaseBinding.inflate(inflater, container, false)
-
+        binding.stub.layoutResource = R.layout.fragment_reports
+        binding.stub.setOnInflateListener { parentView, inflateId -> onViewInflated(parentView,inflateId)}
+        //inflateBinding( binding.stub)
         return binding.root
     }
     override fun onViewCreated(parentView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(parentView, savedInstanceState)
         setHasOptionsMenu(true)
         progressDialog= CustomProgressDialog(requireActivity())
-
-        binding.stub.apply {
-
-            setOnInflateListener { id, childView ->
-                inflateBinding(id)
-                onViewInflated(parentView, childView)
-            }
-
-            inflate()
-        }
-
+        binding.stub.inflate()
     }
 
-    open fun onViewInflated(parentView: View, childView: View) {
+    open fun onViewInflated(parentView: View, inflateView: View) {
         initEventHandler()
         initModelObservers()
     }
