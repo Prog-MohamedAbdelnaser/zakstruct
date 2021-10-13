@@ -5,17 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewStub
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 import com.base.dialogs.CustomProgressDialog
+import com.base.extensions.getDrawableCompat
 import com.zaka.R
-import com.zaka.base.extensions.getDrawableCompat
 import com.zaka.base.extensions.hide
 import com.zaka.databinding.FragmentBaseBinding
-import com.zaka.databinding.FragmentReportsBinding
 
 abstract  class BaseFragment : Fragment() {
 
