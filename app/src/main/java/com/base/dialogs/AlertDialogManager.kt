@@ -1,4 +1,4 @@
-package com.zaka.base.dialogs
+package com.base.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog

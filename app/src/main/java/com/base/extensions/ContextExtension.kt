@@ -1,4 +1,4 @@
-package com.zaka.base.extensions
+package com.base.extensions
 
 import android.content.Context
 import android.graphics.drawable.Drawable
