@@ -59,6 +59,27 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="labelMeduim.NavyBlue" >
+        <item name="android:textColor">@color/navy_blue</item>
+        <item name="android:fontFamily">@font/sst_medium</item>
+
+    </style>
+
+    <style name="RomanLabelNavyBlue" >
+        <item name="android:textColor">@color/navy_blue</item>
+        <item name="android:fontFamily">@font/sst_roman</item>
+
+    </style>
+
+    <style name="label.Silver" >
+        <item name="android:textColor">@color/silver</item>
+    </style>
+
+    <style name="label.Silver.roman" >
+        <item name="android:textColor">@color/silver</item>
+        <item name="android:fontFamily">@font/sst_roman</item>
+    </style>
+
     <style name="labelBold" >
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/sst_arabic_bold</item>
