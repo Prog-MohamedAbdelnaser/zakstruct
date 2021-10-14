@@ -22,15 +22,15 @@ class LoginFragment : BaseFragment() {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginBinding.bind(inflateView)
 
-        //_binding!!.btnLogin!!.text="hi login"
+        _binding!!.btnLogin!!.text="hi login"
         initEventHandler()
     }
 
     override fun initEventHandler() {
         super.initEventHandler()
-//        _binding?.btnLogin?.setOnClickListener {
-//            findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
-//        }
+        _binding?.btnLogin?.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
+        }
     }
 
     override fun onDestroyView() {

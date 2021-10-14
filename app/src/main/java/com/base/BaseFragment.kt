@@ -30,7 +30,7 @@ abstract  class BaseFragment : Fragment() {
     ): View? {
         //   inflater.inflate(R.layout.fragment_base, container, false)
         binding = FragmentBaseBinding.inflate(inflater, container, false)
-        binding.stub.layoutResource = R.layout.fragment_reports
+        binding.stub.layoutResource = layoutResource()
         binding.stub.setOnInflateListener { parentView, inflateId -> onViewInflated(parentView,inflateId)}
         //inflateBinding( binding.stub)
         return binding.root
