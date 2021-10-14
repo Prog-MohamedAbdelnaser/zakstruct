@@ -15,4 +15,13 @@
     <color name="silver">#b8baba</color>
     <color name="black">#000000</color>
     <color name="warm_grey">#7a7a7a</color>
+
+    <color name="light_grey">#80ffffff</color>
+    <color name="steel_blue">#2e7c97</color>
+
+    <color name="gainsboro">#dcdde5</color>
+
+
+
+
 </resources>

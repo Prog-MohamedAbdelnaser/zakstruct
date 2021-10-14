@@ -17,7 +17,6 @@ class LoginOTPFragment : BaseFragment() {
     override fun onViewInflated(parentView: View, inflateView: View) {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginOtpBinding.bind(inflateView)
-        _binding!!.textHome!!.text="hi login otp"
     }
     override fun onDestroyView() {
         super.onDestroyView()
