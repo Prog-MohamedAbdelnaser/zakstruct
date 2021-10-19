@@ -3,15 +3,14 @@
     <style name="Theme.Zaka" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_blue_grey</item>
-<!--      &lt;!&ndash;  <item name="colorPrimaryVariant">@color/water_blue</item>-->
-<!--        <item name="colorOnPrimary">@color/white</item>-->
-<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-<!--        <item name="colorSecondary">@color/water_blue</item>-->
-<!--        <item name="colorSecondaryVariant">@color/water_blue</item>-->
-<!--        <item name="colorOnSecondary">@color/water_blue</item>&ndash;&gt;-->
-<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white_5</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimaryVariant">#101e36</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/water_blue</item>
+        <item name="colorSecondaryVariant">@color/water_blue</item>
+        <item name="colorOnSecondary">@color/water_blue</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -27,7 +26,7 @@
         <item name="boxBackgroundMode">filled</item>
         <item name="errorEnabled">true</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColorHint">#666666</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 
     <style name="EditText" parent="Widget.AppCompat.EditText">
@@ -35,8 +34,8 @@
         <!--        <item name="android:maxHeight">56dp</item>-->
         <item name="android:textSize">16sp</item>
         <item name="android:background">#fff</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
         <item name="boxCornerRadiusTopEnd">4dp</item>
         <item name="boxCornerRadiusTopStart">4dp</item>
 
@@ -44,6 +43,63 @@
         <!--        <item name="android:fontFamily">@font/myriadpro_semibold</item>-->
     </style>
 
+
+
+
+    <style name="Header" >
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/sst_arabic_bold</item>
+
+
+    </style>
+
+    <style name="label" >
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="labelMeduim.NavyBlue" >
+        <item name="android:textColor">@color/navy_blue</item>
+        <item name="android:fontFamily">@font/sst_medium</item>
+
+    </style>
+
+    <style name="RomanLabelNavyBlue" >
+        <item name="android:textColor">@color/navy_blue</item>
+        <item name="android:fontFamily">@font/sst_roman</item>
+
+    </style>
+
+    <style name="label.Silver" >
+        <item name="android:textColor">@color/silver</item>
+    </style>
+
+    <style name="label.Silver.roman" >
+        <item name="android:textColor">@color/silver</item>
+        <item name="android:fontFamily">@font/sst_roman</item>
+    </style>
+
+
+    <style name="blackRoman" >
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/sst_roman</item>
+    </style>
+
+    <style name="labelBold" >
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/sst_arabic_bold</item>
+    </style>
+
+    <style name="labelMeduim" >
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/sst_medium</item>
+    </style>
+
+    <style name="labelNormal" >
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/sst_roman</item>
+    </style>
 
     <style name="Button" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/background_button_login</item>
@@ -60,40 +116,17 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/water_blue</item>
-        <item name="android:textColorSecondary">@color/dark_blue_grey</item>
-        <!--  <item name="colorPrimaryVariant">@color/water_blue</item>
-          <item name="colorOnPrimary">@color/white</item>
-          <!- Secondary brand color. -->
-        <item name="colorSecondary">@color/dark_blue_grey</item>
-        <item name="colorSecondaryVariant">@color/dark_blue_grey</item>
-        <item name="colorOnSecondary">@color/water_blue</item>-->
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white_5</item>
-        <item name="android:windowLightStatusBar">true</item>
-    </style>
 
-    <style name="TextAppearance">
 
-    </style>
-
-    <style name="TextAppearance.ActiveBottomNavigationText">
-        <item name="android:textColor">@color/water_blue</item>
-    </style>
-    <style name="TextAppearance.InActiveBottomNavigationText">
-        <item name="android:textColor">@color/dark_blue_grey</item>
-    </style>
-
-    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="textAllCaps">false</item>
-    </style>
-    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabTextColor">@color/dark_blue_grey</item>
-        <item name="tabMode">scrollable</item>
-        <item name="tabSelectedTextColor">@color/dark_sky_blue</item>
-        <item name="tabTextAppearance">@style/TabTextAppearance</item>
-        <item name="indicatorColor">@color/dark_sky_blue</item>
-        <item name="tabIndicatorHeight">3dp</item>
+    <style name="MaterialAppButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+<!--        <item name="android:textAppearance">@style/TextAppearanceMedium</item>-->
+        <item name="android:textSize">16sp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:background">@drawable/background_button_login</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/white</item>
     </style>
 </resources>

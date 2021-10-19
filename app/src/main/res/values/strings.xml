@@ -11,4 +11,24 @@
     <string name="title_letters">Morsalat</string>
     <string name="title_messages">Messages</string>
     <string name="settings">Settings</string>
+
+    <string name="login_header_ar">هيئة الزكاة والضريبة والجمارك</string>
+    <string name="login_header_en">Zakat,Tax,Customs Authority</string>
+
+    <string name="login_title">Welome back</string>
+    <string name="login_user_name">Mr. Abdullah Al Hossen</string>
+    <string name="login_user_postion">Chief Executive Officer</string>
+    <string name="login_with_another_account">Login with another account</string>
+    <string name="login_forget_pass">Forget Password?</string>
+
+
+
+
+
+    <string name="login_otp_header">Enter OTP</string>
+    <string name="login_otp_description">OTP code has been sent to you via SMS for the mobile number that ends with******9895</string>
+    <string name="login_otp_timer">02 : 20 secs</string>
+    <string name="login_otp_not_received">Didn’t Recieve the Code?</string>
+    <string name="login_otp_resend">Resend Code</string>
+
 </resources>

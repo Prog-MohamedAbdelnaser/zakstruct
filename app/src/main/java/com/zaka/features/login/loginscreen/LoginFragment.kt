@@ -1,6 +1,5 @@
 package com.zaka.features.login.loginscreen
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.base.BaseFragment
 import com.zaka.R
 import com.zaka.databinding.FragmentLoginBinding
-import com.zaka.features.main.MainActivity
 
 class LoginFragment : BaseFragment() {
 
@@ -24,14 +22,14 @@ class LoginFragment : BaseFragment() {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginBinding.bind(inflateView)
 
-        //_binding!!.btnLogin!!.text="hi login"
+//        _binding!!.btnLogin!!.text="hi login"
         initEventHandler()
     }
 
     override fun initEventHandler() {
         super.initEventHandler()
         _binding?.btnLogin?.setOnClickListener {
-            startActivityWithFading(Intent(requireContext(),MainActivity::class.java))
+            findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
         }
     }
 
