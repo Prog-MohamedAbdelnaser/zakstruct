@@ -22,7 +22,7 @@ class LoginFragment : BaseFragment() {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginBinding.bind(inflateView)
 
-        _binding!!.btnLogin!!.text="hi login"
+//        _binding!!.btnLogin!!.text="hi login"
         initEventHandler()
     }
 
