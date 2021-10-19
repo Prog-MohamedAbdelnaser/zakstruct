@@ -26,10 +26,12 @@
 
 
 
+    <color name="windows_blue">#3aacc6</color>
 
 
 
 
     <color name="steel">#868894</color>
     <color name="mid_blue">#2b69a1</color>
+    <color name="tomato">#e95344</color>
 </resources>

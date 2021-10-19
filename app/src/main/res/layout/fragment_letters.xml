@@ -23,14 +23,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    style="@style/ToolbarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/btnFilter"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:textColor="@color/dark_blue_grey"
                     android:lineSpacingExtra="5sp"
                     android:text="Muraslat"/>
                 <ImageView

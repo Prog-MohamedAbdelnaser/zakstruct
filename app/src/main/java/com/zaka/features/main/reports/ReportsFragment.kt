@@ -16,7 +16,6 @@ class ReportsFragment : BaseFragment() {
     override fun onViewInflated(parentView: View, inflateView: View) {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentReportsBinding.bind(inflateView)
-        _binding!!.textHome!!.text="hi mohamed"
     }
     override fun onDestroyView() {
         super.onDestroyView()
