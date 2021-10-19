@@ -7,4 +7,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="tap_to_retry">Reload</string>
+    <string name="title_reports">Reports</string>
+    <string name="title_letters">Morsalat</string>
+    <string name="title_messages">Messages</string>
+    <string name="settings">Settings</string>
 </resources>

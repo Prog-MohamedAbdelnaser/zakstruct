@@ -5,14 +5,18 @@
 
     <color name="navy_blue">#142544</color>
     <color name="white_60">#FEFEFF</color>
+    <color name="white_5">#f5f5f5</color>
     <color name="dark_blue_grey">#142544</color>
     <color name="dark_sky_blue">#4399d8</color>
     <color name="greeny_blue">#4fbbbd</color>
     <color name="water_blue">#1886c4</color>
+
     <color name="dirty_blue">#377f8b</color>
     <color name="dark">#23292f</color>
     <color name="maize">#f5bf58</color>
     <color name="silver">#b8baba</color>
     <color name="black">#000000</color>
     <color name="warm_grey">#7a7a7a</color>
+    <color name="steel">#868894</color>
+    <color name="mid_blue">#2b69a1</color>
 </resources>
