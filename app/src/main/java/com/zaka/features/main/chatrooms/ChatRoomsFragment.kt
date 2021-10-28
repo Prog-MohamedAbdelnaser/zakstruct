@@ -1,10 +1,7 @@
 package com.zaka.features.main.chatrooms
 
 import android.view.View
-import android.view.ViewStub
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.BaseFragment
-import com.base.adapter.BaseAdapter
 import com.zaka.R
 import com.zaka.databinding.FragmentChatRoomsBinding
 
@@ -26,6 +23,7 @@ class ChatRoomsFragment : BaseFragment() {
         chatList!!.add("asdsad")
 
         adapter=ChatRoomsAdapter(chatList,R.layout.messages_item)
+        _binding!!.recyclerView.adapter=adapter
 
     }
     // This property is only valid between onCreateView and

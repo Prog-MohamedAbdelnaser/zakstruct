@@ -20,6 +20,6 @@
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.zaka.features.main.chatrooms.ChatRoomsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_messages"
         tools:layout="@layout/fragment_chat_rooms" />
 </navigation>
