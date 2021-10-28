@@ -30,5 +30,7 @@
     <string name="login_otp_timer">02 : 20 secs</string>
     <string name="login_otp_not_received">Didn’t Recieve the Code?</string>
     <string name="login_otp_resend">Resend Code</string>
+    <string name="check_your_network_connection_and_try_again">StringsRepository</string>
+    <string name="timeout_error_message">timeout_error_message</string>
 
 </resources>

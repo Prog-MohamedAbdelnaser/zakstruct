@@ -18,7 +18,7 @@ object AlertDialogManager {
             context,
             setMessage,
             "",
-            DialogInterface.OnClickListener { dialog, which -> dialog.cancel() }).show()
+            { dialog, which -> dialog.cancel() }).show()
     }
 
 
