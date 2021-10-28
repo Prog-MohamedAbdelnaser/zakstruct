@@ -12,6 +12,7 @@ import com.zaka.di.LanguageUseCaseProvider
 import com.zaka.di.applicationModule
 import com.zaka.di.useCaseModule
 import com.zaka.features.login.di.loginModule
+import com.zaka.features.profile.di.profileModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -36,7 +37,7 @@ class ApplicationClass : Application() {
                 applicationModule,
                 remoteModule,
                 useCaseModule,
-                loginModule
+                loginModule, profileModule
             ))
         }
 

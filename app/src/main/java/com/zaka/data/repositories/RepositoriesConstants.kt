@@ -10,6 +10,7 @@ object RepositoriesConstants {
     val SUPPORTED_LANGUAGES = listOf(LANGUAGE_ENGLISH, LANGUAGE_ARABIC)
 
     const val KEY_PREFRENCE_USER = "USER"
+    const val KEY_PREFRENCE_USER_PROFILE = "USERPROfile"
     const val KEY_PREFRENCE_USER_PRIVILEGE = "USER_PRIVILEGE"
     const val KEY_PREFRENCE_TOKEN = "token"
 
