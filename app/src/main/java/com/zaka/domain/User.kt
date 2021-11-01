@@ -14,5 +14,5 @@ data class User(
 	val token: String? = null,
 
 	@field:SerializedName("refreshToken")
-	val refreshToken: Any? = null
+	val refreshToken: String? = null
 )

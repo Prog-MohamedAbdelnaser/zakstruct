@@ -13,9 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.base.dialogs.CustomProgressDialog
 import com.base.extensions.getDrawableCompat
-import com.zaka.R
 import com.zaka.base.extensions.hide
 import com.zaka.databinding.FragmentBaseBinding
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 abstract  class BaseFragment : Fragment() {
@@ -56,7 +56,7 @@ abstract  class BaseFragment : Fragment() {
                 // Trigger the flow and start listening for values.
                 // Note that this happens when lifecycle is STARTED and stops
                 // collecting when the lifecycle is STOPPED
-                initModelObservers()
+                initModelObservers(this)
             }
         }
     }
@@ -66,7 +66,7 @@ abstract  class BaseFragment : Fragment() {
         requireActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
     }
 
-    open suspend fun initModelObservers(){}
+    open suspend fun initModelObservers(coroutineScope: CoroutineScope) {}
 
     open fun initEventHandler(){}
     protected fun hideProgress() {

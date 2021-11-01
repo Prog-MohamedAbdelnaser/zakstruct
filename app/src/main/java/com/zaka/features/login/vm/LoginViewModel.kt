@@ -1,6 +1,7 @@
 package com.zaka.features.login.vm
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zaka.data.exceptions.APIException
@@ -25,6 +26,8 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
 
     private val _profileState = MutableStateFlow<CommonState<UserProfile>>(CommonState.UnInit)
     val profileState: StateFlow<CommonState<UserProfile>> = _profileState
+
+     val liveDate = MutableLiveData<CommonState<UserProfile>>()
 
     fun login(loginParams: LoginParams){
         viewModelScope.launch{
@@ -59,6 +62,9 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
     }
 
      fun getUserData(){
+         liveDate.value = CommonState.LoadingShow
+
+         _profileState.value = CommonState.LoadingShow
          viewModelScope.launch{
              profile.execute(false).catch {
                  _profileState.value= CommonState.Error(it)

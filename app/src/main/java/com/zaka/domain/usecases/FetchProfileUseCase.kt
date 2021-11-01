@@ -14,9 +14,8 @@ class FetchProfileUseCase(private val profileRepository: ProfileRepository):UseC
     private suspend fun fetchProfile(checkCash: Boolean):Flow<UserProfile> {
         return if (checkCash && profileRepository. isCashProfile() ){
           flow{emit(profileRepository. fetchProfileLocal()!!) }
-        }else{
-            val profile =  profileRepository.fetchRemote().map { it }
-           return profile
+        }else {
+            return profileRepository.fetchRemote()
         }
     }
 }

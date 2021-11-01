@@ -3,6 +3,7 @@ package com.zaka.features.login.loginscreen
 
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.Observer
 
 import androidx.navigation.fragment.findNavController
 import com.base.BaseFragment
@@ -13,8 +14,9 @@ import com.zaka.databinding.FragmentLoginBinding
 import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
 import com.zaka.features.login.vm.LoginViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -29,6 +31,10 @@ class LoginFragment() : BaseFragment() {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginBinding.bind(inflateView)
         initEventHandler()
+        loginViewModel.     getUserData()
+        loginViewModel.liveDate.observe(this, Observer {
+            Log.e("observe" , it.toString())
+        })
     }
 
     override fun initEventHandler() {
@@ -39,41 +45,40 @@ class LoginFragment() : BaseFragment() {
         }
     }
 
-    override suspend fun initModelObservers() {
-        loginViewModel.getUserData()
+     override  suspend fun initModelObservers(coroutineScope: CoroutineScope) {
+         loginViewModel.apply {
 
-        loginViewModel.apply {
-            loginState.collect { it ->
+             coroutineScope.launch {
+                 loginState.collect {
+                 when (it) {
+                     CommonState.LoadingShow -> showProgressDialog()
+                     CommonState.LoadingFinished -> hideProgressDialog()
+                     is CommonState.Success -> {
+                         findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
+                     }
+                     is CommonState.Error -> {
+                         handleApiErrorWithAlert(it.exception)
+                     }
+                 }
+             }
+             }
 
-                when (it) {
-                     CommonState.LoadingShow->showProgressDialog()
-                    CommonState.LoadingFinished -> hideProgressDialog()
-                    is CommonState.Success -> {
-                        findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
-                    }
-                    is CommonState.Error -> {
-                        handleApiErrorWithAlert(it.exception)
-                    }
-                }
-            }
+             coroutineScope.launch { profileState.collect { it ->
+                 Log.e("profilecollect cv", it.toString())
+                 when (it) {
+                     CommonState.LoadingShow -> showProgressDialog()
+                     CommonState.LoadingFinished -> hideProgressDialog()
+                     is CommonState.Success -> {
+                         user = it.data
+                         _binding?.loginUserName?.text = user!!.displayName
+                     }
+                     is CommonState.Error -> {
 
-            profileState.collect{it->
-                Log.e("cv", it.toString())
-
-                when (it) {
-                    CommonState.LoadingShow->showProgressDialog()
-                    CommonState.LoadingFinished -> hideProgressDialog()
-                    is CommonState.Success -> {
-                        user=it.data
-                        _binding?.loginUserName?.text= user!!.displayName
-                    }
-                    is CommonState.Error -> {
-
-                    }
-                }
-            }
-        }
-    }
+                     }
+                 }
+             } }
+         }
+     }
 
     override fun onDestroyView() {
         super.onDestroyView()
