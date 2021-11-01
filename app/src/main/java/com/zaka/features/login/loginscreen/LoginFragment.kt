@@ -10,6 +10,7 @@ import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.data.model.LoginParams
 import com.zaka.databinding.FragmentLoginBinding
+import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
 import com.zaka.features.login.vm.LoginViewModel
 import kotlinx.coroutines.flow.collect
@@ -22,6 +23,7 @@ class LoginFragment() : BaseFragment() {
     val loginViewModel:LoginViewModel by viewModel()
     private var _binding: FragmentLoginBinding? = null
     override fun layoutResource(): Int  = R.layout.fragment_login
+    private  var user: UserProfile?=null
 
     override fun onViewInflated(parentView: View, inflateView: View) {
         super.onViewInflated(parentView, inflateView)
@@ -38,9 +40,11 @@ class LoginFragment() : BaseFragment() {
     }
 
     override suspend fun initModelObservers() {
+        loginViewModel.getUserData()
 
         loginViewModel.apply {
             loginState.collect { it ->
+
                 when (it) {
                      CommonState.LoadingShow->showProgressDialog()
                     CommonState.LoadingFinished -> hideProgressDialog()
@@ -53,11 +57,21 @@ class LoginFragment() : BaseFragment() {
                 }
             }
 
+            profileState.collect{it->
+                Log.e("cv", it.toString())
 
-            getUserData().onEach {
-                Log.e("cv",it.displayName.toString())
+                when (it) {
+                    CommonState.LoadingShow->showProgressDialog()
+                    CommonState.LoadingFinished -> hideProgressDialog()
+                    is CommonState.Success -> {
+                        user=it.data
+                        _binding?.loginUserName?.text= user!!.displayName
+                    }
+                    is CommonState.Error -> {
+
+                    }
+                }
             }
-
         }
     }
 

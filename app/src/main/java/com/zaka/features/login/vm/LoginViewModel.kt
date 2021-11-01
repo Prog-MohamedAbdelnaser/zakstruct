@@ -1,5 +1,6 @@
 package com.zaka.features.login.vm
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zaka.data.exceptions.APIException
@@ -29,7 +30,7 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
         viewModelScope.launch{
             _loginState.value = CommonState.LoadingShow
             loginRepository.login(loginParams)
-                .map { profile.fetchProfile(false).onEach {
+                .map { profile.execute(false).onEach {
                     loginRepository.generateOtp("+96892026954").collect()
                 }.collect{} }
                 .catch {it-> _loginState.value = CommonState.Error(it) }
@@ -57,7 +58,17 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
         return loginRepository.checkLogin()
     }
 
-    suspend fun getUserData(): Flow<UserProfile> {
-        return profile.execute(true).onEach { it }
+     fun getUserData(){
+         viewModelScope.launch{
+             profile.execute(false).catch {
+                 _profileState.value= CommonState.Error(it)
+             }.onCompletion {
+                 _profileState.value = CommonState.LoadingFinished
+             }.collect {
+                 _profileState.value= CommonState.Success(it)
+                 Log.e("vvv",it.displayName.toString())
+             }
+         }
+
     }
 }
