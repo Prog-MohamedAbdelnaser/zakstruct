@@ -19,9 +19,11 @@ class HeadersInterceptor() : Interceptor, KoinComponent {
     private fun createNewRequestWithApiKey(oldRequest: Request): Request {
         val requestBuilder = oldRequest.newBuilder()
                 .addHeader(keyLanguage, get(StringQualifier(DIConstants.KEY_CURRENT_LANGUAGE)))
-      /*  mainRepository.getCurrentLoggedInUser()?.apply {
-          //  requestBuilder.addHeader(keyAuthorization, "Bearer ${this.accessToken}")
-        }*/
+          .addHeader(keyAuthorization, "Bearer "+get(StringQualifier(DIConstants.KEY_USER_TOKEN)))
+
+        /*  mainRepository.getCurrentLoggedInUser()?.apply {
+            //  requestBuilder.addHeader(keyAuthorization, "Bearer ${this.accessToken}")
+          }*/
         return requestBuilder.build()
     }
 }

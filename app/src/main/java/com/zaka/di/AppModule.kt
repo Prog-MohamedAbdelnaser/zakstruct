@@ -9,6 +9,7 @@ import com.zaka.data.repositories.StringsRepository
 import com.zaka.data.sources.local.AppPreference
 import com.zaka.di.DIConstants.KEY_CURRENT_LANGUAGE
 import com.zaka.di.DIConstants.KEY_GLIDE_OKHTTP_CLIENT
+import com.zaka.di.DIConstants.KEY_USER_TOKEN
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.qualifier.StringQualifier
@@ -43,6 +44,10 @@ val applicationModule = module {
     single(StringQualifier(DEFAULT_LOCALE)) { get<LocaleRepository>().getLocale() }
 
     factory(StringQualifier(KEY_CURRENT_LANGUAGE)) { get<LocaleRepository>().getLanguage() }
+
+
+    factory(StringQualifier(KEY_USER_TOKEN)) { get<LocaleRepository>().getUserToken() }
+
 
 
     single(StringQualifier(KEY_GLIDE_OKHTTP_CLIENT)) {

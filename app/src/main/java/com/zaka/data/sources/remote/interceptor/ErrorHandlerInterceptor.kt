@@ -1,5 +1,6 @@
 package com.zaka.data.sources.remote.interceptor
 
+import android.util.Log
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.zaka.data.exceptions.APIException
@@ -58,7 +59,11 @@ class ErrorHandlerInterceptor(private val stringsRepository: StringsRepository) 
                     code = obj.get(keyCode).asString
                 }
                 if (obj is JsonObject && obj.has(keyMessage)) {
-                    message = obj.get(keyMessage).asString
+                    if(obj.get(keyMessage).toString()!="null"){
+                        message = obj.get(keyMessage).asString
+                        Log.e("naser: %s", obj.get(keyMessage).toString())
+                    }
+
                 }
             } catch (e: Exception) {
                 Timber.i("Error: %s", e.message)

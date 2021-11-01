@@ -6,4 +6,7 @@ object DIConstants {
     const val KEY_GLIDE_OKHTTP_CLIENT = "GLIDE_OKHTTP_CLIENT"
     const val KEY_DEVICE_ID = "KEY_DEVICE_ID"
 
+    const val KEY_USER_TOKEN = "CURRENT_TOKEN"
+
+
 }

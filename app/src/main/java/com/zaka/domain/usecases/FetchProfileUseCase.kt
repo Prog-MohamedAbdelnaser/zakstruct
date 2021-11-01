@@ -11,7 +11,7 @@ class FetchProfileUseCase(private val profileRepository: ProfileRepository):UseC
         return fetchProfile(fromCash?:false)
     }
 
-    private suspend fun fetchProfile(checkCash: Boolean):Flow<UserProfile> {
+     suspend fun fetchProfile(checkCash: Boolean):Flow<UserProfile> {
         return if (checkCash && profileRepository. isCashProfile() ){
           flow{emit(profileRepository. fetchProfileLocal()!!) }
         }else{

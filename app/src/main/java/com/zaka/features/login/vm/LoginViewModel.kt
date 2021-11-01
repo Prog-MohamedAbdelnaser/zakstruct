@@ -6,12 +6,14 @@ import com.zaka.data.exceptions.APIException
 import com.zaka.data.model.LoginParams
 import com.zaka.data.repositories.LoginRepository
 import com.zaka.domain.User
+import com.zaka.domain.UserProfile
+import com.zaka.domain.usecases.FetchProfileUseCase
 import com.zaka.features.common.CommonState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val loginRepository: LoginRepository) :ViewModel() {
+class LoginViewModel(private val loginRepository: LoginRepository,private val profile: FetchProfileUseCase) :ViewModel() {
 
     private val _loginState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val loginState: StateFlow<CommonState<String>> = _loginState
@@ -19,11 +21,17 @@ class LoginViewModel(private val loginRepository: LoginRepository) :ViewModel() 
     private val _otpState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val otpState: StateFlow<CommonState<String>> = _otpState
 
+
+    private val _profileState = MutableStateFlow<CommonState<UserProfile>>(CommonState.UnInit)
+    val profileState: StateFlow<CommonState<UserProfile>> = _profileState
+
     fun login(loginParams: LoginParams){
         viewModelScope.launch{
             _loginState.value = CommonState.LoadingShow
             loginRepository.login(loginParams)
-                .map { loginRepository.generateOtp("+96892026954").collect() }
+                .map { profile.fetchProfile(false).onEach {
+                    loginRepository.generateOtp("+96892026954").collect()
+                }.collect{} }
                 .catch {it-> _loginState.value = CommonState.Error(it) }
                 .onCompletion { _loginState.value = CommonState.LoadingFinished }
                 .collect {
@@ -42,5 +50,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) :ViewModel() 
                     _otpState.value = CommonState.Success("it")
                 }
         }
+    }
+
+
+    fun checkLoggedIn():Boolean{
+        return loginRepository.checkLogin()
+    }
+
+    suspend fun getUserData(): Flow<UserProfile> {
+        return profile.execute(true).onEach { it }
     }
 }

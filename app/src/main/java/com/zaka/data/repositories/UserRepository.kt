@@ -1,5 +1,6 @@
 package com.zaka.data.repositories
 
+import com.zaka.data.repositories.RepositoriesConstants.KEY_PREFRENCE_TOKEN
 import com.zaka.data.repositories.RepositoriesConstants.KEY_PREFRENCE_USER
 import com.zaka.data.sources.local.AppPreference
 import com.zaka.domain.User
@@ -17,7 +18,11 @@ class UserRepository (private val appPreference: AppPreference){
 
     fun saveUserData(user: User){
         appPreference.saveObject(KEY_PREFRENCE_USER,user)
+        appPreference.putString(KEY_PREFRENCE_TOKEN, user.token.toString())
     }
+
+
+
 
 
     fun clear(){

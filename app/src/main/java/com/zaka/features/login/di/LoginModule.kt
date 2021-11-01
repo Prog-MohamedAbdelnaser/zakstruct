@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 
 val loginModule = module {
     factory {  get<Retrofit>().create(LoginAPI::class.java)}
-    factory { LoginRepository(get(),get()) }
+    factory { LoginRepository(get(),get(),get()) }
     factory { UserRepository(get()) }
-    viewModel { LoginViewModel(get()) }
+    viewModel { LoginViewModel(get(),get()) }
 }

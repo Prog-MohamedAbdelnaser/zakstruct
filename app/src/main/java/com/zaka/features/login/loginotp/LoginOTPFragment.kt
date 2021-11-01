@@ -1,6 +1,7 @@
 package com.zaka.features.login.loginotp
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.view.ViewStub
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class LoginOTPFragment : BaseFragment() {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginOtpBinding.bind(inflateView)
         initEventHandler()
+        startResendCounter()
     }
 
     override fun initEventHandler() {
@@ -35,6 +37,22 @@ class LoginOTPFragment : BaseFragment() {
             loginViewModel.confirmOtp(_binding!!.otpView.text.toString())
         }
 
+    }
+
+
+    fun startResendCounter() {
+        object : CountDownTimer(TIMER_LENGTH, 1000) {
+            override fun onFinish() {
+                if (isAdded) {
+
+                }
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                if (isAdded)
+                    _binding?.textOtpTimer?.text = "00:${millisUntilFinished / 1000}"
+            }
+        }.start()
     }
 
     override suspend fun initModelObservers() {
@@ -57,5 +75,9 @@ class LoginOTPFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val TIMER_LENGTH: Long = 60 * 1000
     }
 }
