@@ -16,7 +16,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LoginOTPFragment : BaseFragment() {
 
     private val loginViewModel:LoginViewModel by viewModel()
-
     private var _binding: FragmentLoginOtpBinding? = null
     override fun layoutResource(): Int  = R.layout.fragment_login_otp
 
@@ -33,13 +32,19 @@ class LoginOTPFragment : BaseFragment() {
             loginViewModel.confirmOtp(_binding!!.otpView.text.toString())
         }
 
+        _binding?.textResendCode?.setOnClickListener {
+            startResendCounter()
+        }
+
     }
 
 
-    fun startResendCounter() {
+    private fun startResendCounter() {
         object : CountDownTimer(TIMER_LENGTH, 1000) {
             override fun onFinish() {
                 if (isAdded) {
+                   _binding?.textOtpNotReceived?.visibility=View.VISIBLE
+                    _binding?.textResendCode?.visibility=View.VISIBLE
 
                 }
             }
@@ -47,6 +52,8 @@ class LoginOTPFragment : BaseFragment() {
             override fun onTick(millisUntilFinished: Long) {
                 if (isAdded)
                     _binding?.textOtpTimer?.text = "00:${millisUntilFinished / 1000}"
+                _binding?.textOtpNotReceived?.visibility=View.GONE
+                _binding?.textResendCode?.visibility=View.GONE
             }
         }.start()
     }

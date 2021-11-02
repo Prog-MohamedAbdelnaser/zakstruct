@@ -18,7 +18,7 @@
 
     <style name="Theme.Zaka.login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <item name="colorPrimary">@color/dark_blue_grey</item>
+        <item name="colorPrimary">@color/lightseagreen</item>
         <item name="colorPrimaryVariant">#101e36</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/water_blue</item>
@@ -72,6 +72,7 @@
     <style name="TextAppearanceBold.MidBlue">
         <item name="android:textColor">@color/mid_blue</item>
     </style>
+
     <style name="MaterialTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
         <item name="hintAnimationEnabled">true</item>
         <item name="boxStrokeColor">#13646464</item>
@@ -84,20 +85,19 @@
         <item name="errorEnabled">true</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColorHint">@color/white</item>
-
-
+        <item name="colorAccent">@color/windows_blue</item>
     </style>
 
     <style name="EditText" parent="Widget.AppCompat.EditText">
 
         <!--        <item name="android:maxHeight">56dp</item>-->
+        <item name="colorControlActivated">@color/lightseagreen</item>
         <item name="android:textSize">16sp</item>
         <item name="android:background">#fff</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/text_input_color_selector</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="boxCornerRadiusTopEnd">4dp</item>
         <item name="boxCornerRadiusTopStart">4dp</item>
-
 
         <!--        <item name="android:fontFamily">@font/myriadpro_semibold</item>-->
     </style>

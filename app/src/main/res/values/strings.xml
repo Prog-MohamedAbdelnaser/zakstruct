@@ -16,6 +16,8 @@
     <string name="login_header_en">Zakat,Tax,Customs Authority</string>
 
     <string name="login_title">Welome back</string>
+    <string name="login_title_first_time">Welcome to Executives App</string>
+
     <string name="login_user_name">Mr. Abdullah Al Hossen</string>
     <string name="login_user_postion">Chief Executive Officer</string>
     <string name="login_with_another_account">Login with another account</string>
