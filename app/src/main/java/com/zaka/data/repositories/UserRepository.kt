@@ -23,8 +23,6 @@ class UserRepository (private val appPreference: AppPreference){
 
 
 
-
-
     fun clear(){
         appPreference.saveObject(KEY_PREFRENCE_USER,null)
     }
