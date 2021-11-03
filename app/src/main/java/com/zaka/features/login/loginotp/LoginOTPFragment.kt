@@ -6,17 +6,20 @@ import com.base.BaseFragment
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.databinding.FragmentLoginOtpBinding
+import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
 import com.zaka.features.login.vm.LoginViewModel
 import com.zaka.features.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginOTPFragment : BaseFragment() {
 
     private val loginViewModel:LoginViewModel by viewModel()
     private var _binding: FragmentLoginOtpBinding? = null
+    private  var user: UserProfile?=null
     override fun layoutResource(): Int  = R.layout.fragment_login_otp
 
     override fun onViewInflated(parentView: View, inflateView: View) {
@@ -35,9 +38,7 @@ class LoginOTPFragment : BaseFragment() {
         _binding?.textResendCode?.setOnClickListener {
             startResendCounter()
         }
-
     }
-
 
     private fun startResendCounter() {
         object : CountDownTimer(TIMER_LENGTH, 1000) {
@@ -45,13 +46,12 @@ class LoginOTPFragment : BaseFragment() {
                 if (isAdded) {
                    _binding?.textOtpNotReceived?.visibility=View.VISIBLE
                     _binding?.textResendCode?.visibility=View.VISIBLE
-
                 }
             }
 
             override fun onTick(millisUntilFinished: Long) {
                 if (isAdded)
-                    _binding?.textOtpTimer?.text = "00:${millisUntilFinished / 1000}"
+                _binding?.textOtpTimer?.text = "00:${millisUntilFinished / 1000}"
                 _binding?.textOtpNotReceived?.visibility=View.GONE
                 _binding?.textResendCode?.visibility=View.GONE
             }
@@ -66,12 +66,24 @@ class LoginOTPFragment : BaseFragment() {
                     CommonState.LoadingShow->showProgressDialog()
                     CommonState.LoadingFinished -> hideProgressDialog()
                     is CommonState.Success -> {
+                        loginViewModel.getUserData()
                         startActivity(MainActivity.newIntent(context))
                     }
                     is CommonState.Error -> {
                         handleApiErrorWithAlert(it.exception)
                     }
                 }
+            }
+
+            coroutineScope.launch { profileState.collect { it ->
+
+                when (it) {
+                    CommonState.LoadingShow -> showProgressDialog()
+                    CommonState.LoadingFinished -> hideProgressDialog()
+                    is CommonState.Success -> { user = it.data }
+                    is CommonState.Error -> { handleApiErrorWithAlert(it.exception) }
+                }
+            }
             }
         }
     }

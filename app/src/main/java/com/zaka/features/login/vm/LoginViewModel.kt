@@ -4,14 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zaka.data.exceptions.APIException
 import com.zaka.data.model.LoginParams
+import com.zaka.data.model.RefreshTokenParams
 import com.zaka.data.repositories.LoginRepository
-import com.zaka.domain.User
 import com.zaka.domain.UserProfile
 import com.zaka.domain.usecases.FetchProfileUseCase
 import com.zaka.features.common.CommonState
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -33,9 +31,9 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
         viewModelScope.launch{
             _loginState.value = CommonState.LoadingShow
             loginRepository.login(loginParams)
-                .map { profile.execute(false).onEach {
-                    loginRepository.generateOtp("+96892026954").collect()
-                }.collect{} }
+//                .map { profile.execute(false).onEach {
+//                    loginRepository.generateOtp("+96892026954").collect()
+//                }.collect{} }
                 .catch {it-> _loginState.value = CommonState.Error(it) }
                 .onCompletion { _loginState.value = CommonState.LoadingFinished }
                 .collect {
@@ -76,5 +74,30 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
              }
          }
 
+    }
+
+
+    fun refreshToken(refreshTokenParams: RefreshTokenParams){
+        viewModelScope.launch{
+            _loginState.value = CommonState.LoadingShow
+            loginRepository.refreshToken(refreshTokenParams)
+                .catch {it-> _loginState.value = CommonState.Error(it) }
+                .onCompletion { _loginState.value = CommonState.LoadingFinished }
+                .collect {
+                    _loginState.value = CommonState.Success("it")
+                }
+        }
+    }
+
+    fun generateOtp(otp:String){
+        viewModelScope.launch{
+            _otpState.value = CommonState.LoadingShow
+            loginRepository.confirmOtp(otp)
+                .catch {it-> _otpState.value = CommonState.Error(it) }
+                .onCompletion { _otpState.value = CommonState.LoadingFinished }
+                .collect {
+                    _otpState.value = CommonState.Success("it")
+                }
+        }
     }
 }
