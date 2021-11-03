@@ -1,17 +1,17 @@
 package com.zaka.data.repositories
 
 import com.zaka.data.model.LoginParams
+import com.zaka.data.model.RefreshTokenParams
 import com.zaka.data.sources.local.AppPreference
 import com.zaka.data.sources.remote.api.LoginAPI
 import com.zaka.domain.APIResponse
-import com.zaka.domain.User
-import com.zaka.domain.UserProfile
+import com.zaka.domain.UserToken
+import com.zaka.domain.OTPToken
 import kotlinx.coroutines.flow.*
-import java.lang.Exception
 
 class LoginRepository(private val  loginAPI: LoginAPI , private val userRepository: UserRepository,private val appPreference: AppPreference) {
 
-     suspend fun login(loginParams: LoginParams): Flow<APIResponse<User>> {
+     suspend fun login(loginParams: LoginParams): Flow<APIResponse<OTPToken>> {
        return  flow {
            emit(loginAPI.login(loginParams))
            println("AFETR EMIT LOGIN ")
@@ -25,15 +25,22 @@ class LoginRepository(private val  loginAPI: LoginAPI , private val userReposito
            emit(loginAPI.sendOtp(phone))
          }
     }
-    suspend fun confirmOtp(otp:String): Flow<APIResponse<String>> {
+    suspend fun confirmOtp(otp:String): Flow<APIResponse<UserToken>> {
        return  flow {
            emit(loginAPI.confirmOtp(otp))
-         }
+         }.onEach {
+           userRepository.saveTokenAfterOTPVerification(it.payload!!)
+       }
     }
 
      fun checkLogin(): Boolean {
         return  userRepository.isLoged()
     }
 
+    suspend fun refreshToken(refreshTokenParams: RefreshTokenParams): Flow<APIResponse<String>> {
+        return  flow {
+            emit(loginAPI.refreshToken(refreshTokenParams))
+        }
+    }
 
 }

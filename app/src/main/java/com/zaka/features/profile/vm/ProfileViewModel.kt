@@ -2,8 +2,6 @@ package com.zaka.features.profile.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zaka.data.model.LoginParams
-import com.zaka.domain.User
 import com.zaka.domain.UserProfile
 import com.zaka.domain.usecases.FetchProfileUseCase
 import com.zaka.features.common.CommonState

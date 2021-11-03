@@ -24,6 +24,7 @@ class HeadersInterceptor() : Interceptor, KoinComponent {
         /*  mainRepository.getCurrentLoggedInUser()?.apply {
             //  requestBuilder.addHeader(keyAuthorization, "Bearer ${this.accessToken}")
           }*/
+
         return requestBuilder.build()
     }
 }

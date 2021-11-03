@@ -10,6 +10,7 @@ import com.zaka.R
 import com.zaka.base.extensions.hide
 import com.zaka.base.extensions.show
 import com.zaka.data.model.LoginParams
+import com.zaka.data.model.RefreshTokenParams
 import com.zaka.databinding.FragmentLoginBinding
 import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
@@ -34,6 +35,8 @@ class LoginFragment : BaseFragment() {
         loginViewModel.liveDate.observe(this, Observer {
             Log.e("observe" , it.toString())
         })
+
+//        loginViewModel.refreshToken(RefreshTokenParams("","" ))
     }
 
     override fun initEventHandler() {
