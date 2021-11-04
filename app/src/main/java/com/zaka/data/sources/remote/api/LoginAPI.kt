@@ -18,6 +18,6 @@ interface LoginAPI {
     suspend  fun sendOtp(@Body phone:String): APIResponse<String>
 
     @POST("accounts/refreshToken")
-    suspend  fun refreshToken(@Body refreshTokenParams: RefreshTokenParams): APIResponse<String>
+    suspend  fun refreshToken(@Body refreshTokenParams: RefreshTokenParams): APIResponse<UserToken>
 
 }

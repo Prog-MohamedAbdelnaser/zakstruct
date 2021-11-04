@@ -17,6 +17,7 @@ object RepositoriesConstants {
     const val KEY_FIREBASE_TOKEN = "FIREBASE_TOKEN"
 
     const val KEY_LANGUAGE_CODE: String = "LANGUAGE_CODE"
+    const val KEY_ENABLE_FINGER_PRINT: String = "FINGERPRINT_CODE"
 
     const val KEY_DEVICE_INFO: String = "DEVICE_INFO"
 

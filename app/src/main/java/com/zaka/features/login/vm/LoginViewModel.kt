@@ -18,6 +18,9 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
     private val _loginState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val loginState: StateFlow<CommonState<String>> = _loginState
 
+    private val _refreshSessionState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
+    val refreshSessionState: StateFlow<CommonState<String>> = _refreshSessionState
+
     private val _otpState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val otpState: StateFlow<CommonState<String>> = _otpState
 
@@ -73,14 +76,14 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
     }
 
 
-    fun refreshToken(refreshTokenParams: RefreshTokenParams){
+    fun refreshToken(){
         viewModelScope.launch{
-            _loginState.value = CommonState.LoadingShow
-            loginRepository.refreshToken(refreshTokenParams)
-                .catch {it-> _loginState.value = CommonState.Error(it) }
-                .onCompletion { _loginState.value = CommonState.LoadingFinished }
+            _refreshSessionState.value = CommonState.LoadingShow
+            loginRepository.refreshToken()
+                .catch {it-> _refreshSessionState.value = CommonState.Error(it) }
+                .onCompletion { _refreshSessionState.value = CommonState.LoadingFinished }
                 .collect {
-                    _loginState.value = CommonState.Success("it")
+                    _refreshSessionState.value = CommonState.Success("it")
                 }
         }
     }

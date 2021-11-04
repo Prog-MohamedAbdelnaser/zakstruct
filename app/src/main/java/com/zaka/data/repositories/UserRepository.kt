@@ -9,9 +9,9 @@ import com.zaka.domain.OTPToken
 // Created by mohamed abdelnaser on 7/4/19.
 class UserRepository (private val appPreference: AppPreference){
 
-    fun getLogedInUser(): OTPToken?=
-        if (appPreference.getObject(KEY_PREFRENCE_USER, OTPToken::class.java) != null)
-            appPreference.getObject(KEY_PREFRENCE_USER, OTPToken::class.java)
+    fun getLogedInUser(): UserToken?=
+        if (appPreference.getObject(KEY_PREFRENCE_USER, UserToken::class.java) != null)
+            appPreference.getObject(KEY_PREFRENCE_USER, UserToken::class.java)
          else null
 
 
