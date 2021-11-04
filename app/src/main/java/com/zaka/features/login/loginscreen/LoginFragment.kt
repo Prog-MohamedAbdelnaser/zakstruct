@@ -55,7 +55,11 @@ class LoginFragment : BaseFragment() {
                      CommonState.LoadingShow -> showProgressDialog()
                      CommonState.LoadingFinished -> hideProgressDialog()
                      is CommonState.Success -> {
+//                         if (findNavController().currentDestination?.id == R.id.action_loginFragment_to_loginOTPFragment) {
+//                             findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
+//                         }
                          findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
+
                      }
                      is CommonState.Error -> {
                          handleApiErrorWithAlert(it.exception)

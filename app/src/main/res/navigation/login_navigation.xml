@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_loginOTPFragment"
-            app:destination="@id/loginOTPFragment" />
+            app:destination="@id/loginOTPFragment"
+
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/login_navigation"
+            />
     </fragment>
     <fragment
         android:id="@+id/loginOTPFragment"
