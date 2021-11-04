@@ -32,9 +32,6 @@ class LoginFragment : BaseFragment() {
         _binding=FragmentLoginBinding.bind(inflateView)
         initEventHandler()
         loginViewModel.getUserData()
-        loginViewModel.liveDate.observe(this, Observer {
-            Log.e("observe" , it.toString())
-        })
 
 //        loginViewModel.refreshToken(RefreshTokenParams("","" ))
     }

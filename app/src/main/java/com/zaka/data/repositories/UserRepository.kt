@@ -28,7 +28,11 @@ class UserRepository (private val appPreference: AppPreference){
         appPreference.putString(KEY_PREFRENCE_TOKEN, user.token.toString())
     }
 
+
+
     fun clear(){
         appPreference.saveObject(KEY_PREFRENCE_USER,null)
+        appPreference.putString(KEY_PREFRENCE_TOKEN, "")
+
     }
 }

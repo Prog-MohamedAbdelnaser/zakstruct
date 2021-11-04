@@ -66,7 +66,6 @@ class LoginOTPFragment : BaseFragment() {
                     CommonState.LoadingShow->showProgressDialog()
                     CommonState.LoadingFinished -> hideProgressDialog()
                     is CommonState.Success -> {
-                        loginViewModel.getUserData()
                         startActivity(MainActivity.newIntent(context))
                     }
                     is CommonState.Error -> {
@@ -75,16 +74,6 @@ class LoginOTPFragment : BaseFragment() {
                 }
             }
 
-            coroutineScope.launch { profileState.collect { it ->
-
-                when (it) {
-                    CommonState.LoadingShow -> showProgressDialog()
-                    CommonState.LoadingFinished -> hideProgressDialog()
-                    is CommonState.Success -> { user = it.data }
-                    is CommonState.Error -> { handleApiErrorWithAlert(it.exception) }
-                }
-            }
-            }
         }
     }
     override fun onDestroyView() {

@@ -25,8 +25,6 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
     private val _profileState = MutableStateFlow<CommonState<UserProfile>>(CommonState.UnInit)
     val profileState: StateFlow<CommonState<UserProfile>> = _profileState
 
-     val liveDate = MutableLiveData<CommonState<UserProfile>>()
-
     fun login(loginParams: LoginParams){
         viewModelScope.launch{
             _loginState.value = CommonState.LoadingShow
@@ -60,8 +58,6 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
     }
 
      fun getUserData(){
-         liveDate.value = CommonState.LoadingShow
-
          _profileState.value = CommonState.LoadingShow
          viewModelScope.launch{
              profile.execute(false).catch {

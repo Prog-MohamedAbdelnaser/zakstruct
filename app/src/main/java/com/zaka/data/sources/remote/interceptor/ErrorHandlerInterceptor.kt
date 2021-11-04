@@ -72,7 +72,7 @@ class ErrorHandlerInterceptor(private val stringsRepository: StringsRepository) 
 
             // Check if status has an error code then throw and exception so retrofit can trigger the onFailure callback method.
             // Anything above 400 is treated as a server error.
-            if (status == successStatus ||status == "202") {
+            if (status == successStatus) {
             }else{
                 throw APIException(code, message)
 
