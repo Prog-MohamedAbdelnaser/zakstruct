@@ -11,6 +11,6 @@ import retrofit2.Retrofit
 
 val settingsModule = module {
     factory {  get<Retrofit>().create(SettingsAPI::class.java)}
-    factory { SettingsRepository(get()) }
+    factory { SettingsRepository(get(),get()) }
     viewModel { SettingsViewModel(get()) }
 }

@@ -22,4 +22,8 @@
         android:name="com.zaka.features.main.chatrooms.ChatRoomsFragment"
         android:label="@string/title_messages"
         tools:layout="@layout/fragment_chat_rooms" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.zaka.features.settings.SettingsFragment"
+        android:label="@string/settings" />
 </navigation>

@@ -37,9 +37,12 @@ class LoginRepository(private val  loginAPI: LoginAPI , private val userReposito
         return  userRepository.isLoged()
     }
 
-    suspend fun refreshToken(refreshTokenParams: RefreshTokenParams): Flow<APIResponse<String>> {
+    suspend fun refreshToken(): Flow<APIResponse<UserToken>> {
         return  flow {
-            emit(loginAPI.refreshToken(refreshTokenParams))
+            emit(loginAPI.refreshToken(RefreshTokenParams(token = userRepository.getLogedInUser()?.token,
+            refreshToken = userRepository.getLogedInUser()?.refreshToken)))
+        }.onEach {
+            userRepository.saveTokenAfterOTPVerification(it.payload!!)
         }
     }
 

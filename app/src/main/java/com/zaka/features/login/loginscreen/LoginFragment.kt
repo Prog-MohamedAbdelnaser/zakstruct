@@ -1,4 +1,5 @@
 package com.zaka.features.login.loginscreen
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import com.zaka.databinding.FragmentLoginBinding
 import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
 import com.zaka.features.login.vm.LoginViewModel
+import com.zaka.features.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -38,8 +40,12 @@ class LoginFragment : BaseFragment() {
 
     override fun initEventHandler() {
         super.initEventHandler()
+
         _binding?.btnLogin?.setOnClickListener {
             loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = "mgafaar-c"))
+        }
+        _binding?.btnLoginWithFinger?.setOnClickListener {
+            loginViewModel.refreshToken()
         }
     }
 
@@ -60,6 +66,20 @@ class LoginFragment : BaseFragment() {
                  }
              }
              }
+             coroutineScope.launch {
+                 refreshSessionState.collect {
+                 when (it) {
+                     CommonState.LoadingShow -> showProgressDialog()
+                     CommonState.LoadingFinished -> hideProgressDialog()
+                     is CommonState.Success -> {
+                         startActivityWithFading(Intent(requireContext(), MainActivity::class.java))
+                     }
+                     is CommonState.Error -> {
+                         handleApiErrorWithAlert(it.exception)
+                     }
+                 }
+             }
+             }
 
              coroutineScope.launch { profileState.collect { it ->
 
@@ -71,6 +91,7 @@ class LoginFragment : BaseFragment() {
                          user = it.data
                          _binding?.loginUserName?.text = user!!.displayName
                          _binding?.loginUserPostion?.text = user!!.jobTitle
+                         _binding?.loutFingerprint?.show()
                      }
                      is CommonState.Error -> {
                          _binding?.loginWelcomTitle?.text=resources.getString(R.string.login_title_first_time)
