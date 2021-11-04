@@ -31,7 +31,7 @@ class SettingsFragment : BaseFragment() {
 
     override fun initEventHandler() {
         super.initEventHandler()
-        _binding?.switchBiometrics!!.setOnCheckedChangeListener { compoundButton, checked ->
+        _binding?.switchBiometrics?.setOnCheckedChangeListener { compoundButton, checked ->
             if (checked){
                /// settingsViewModel.addDeviceId();
             }

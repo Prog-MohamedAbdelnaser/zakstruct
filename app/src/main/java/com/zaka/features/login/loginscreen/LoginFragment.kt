@@ -1,17 +1,18 @@
 package com.zaka.features.login.loginscreen
 import android.content.Intent
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
+import android.widget.Toast
+import androidx.biometric.BiometricPrompt
 
 import androidx.navigation.fragment.findNavController
 import com.base.BaseFragment
+import com.base.biometeric.BiometricAuthListener
+import com.base.biometeric.BiometricUtil
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.base.extensions.hide
 import com.zaka.base.extensions.show
 import com.zaka.data.model.LoginParams
-import com.zaka.data.model.RefreshTokenParams
 import com.zaka.databinding.FragmentLoginBinding
 import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
@@ -22,7 +23,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginFragment : BaseFragment() {
+class LoginFragment : BaseFragment(), BiometricAuthListener {
 
     val loginViewModel:LoginViewModel by viewModel()
     private var _binding: FragmentLoginBinding? = null
@@ -34,8 +35,6 @@ class LoginFragment : BaseFragment() {
         _binding=FragmentLoginBinding.bind(inflateView)
         initEventHandler()
         loginViewModel.getUserData()
-
-//        loginViewModel.refreshToken(RefreshTokenParams("","" ))
     }
 
     override fun initEventHandler() {
@@ -45,7 +44,12 @@ class LoginFragment : BaseFragment() {
             loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = "mgafaar-c"))
         }
         _binding?.btnLoginWithFinger?.setOnClickListener {
-            loginViewModel.refreshToken()
+            BiometricUtil.showBiometricPrompt(
+                activity = this,
+                listener = this,
+                cryptoObject = null,
+                allowDeviceCredential = true
+            )
         }
     }
 
@@ -58,11 +62,7 @@ class LoginFragment : BaseFragment() {
                      CommonState.LoadingShow -> showProgressDialog()
                      CommonState.LoadingFinished -> hideProgressDialog()
                      is CommonState.Success -> {
-//                         if (findNavController().currentDestination?.id == R.id.action_loginFragment_to_loginOTPFragment) {
-//                             findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
-//                         }
                          findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
-
                      }
                      is CommonState.Error -> {
                          handleApiErrorWithAlert(it.exception)
@@ -113,5 +113,14 @@ class LoginFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onBiometricAuthenticationSuccess(result: BiometricPrompt.AuthenticationResult) {
+        loginViewModel.refreshToken()
+    }
+
+    override fun onBiometricAuthenticationError(errorCode: Int, errorMessage: String) {
+        Toast.makeText(context, "Biometric login failed. Error: $errorMessage", Toast.LENGTH_SHORT)
+            .show()
     }
 }

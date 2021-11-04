@@ -3,6 +3,7 @@ package com.zaka.features.login.loginotp
 import android.os.CountDownTimer
 import android.view.View
 import com.base.BaseFragment
+import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.databinding.FragmentLoginOtpBinding
@@ -66,14 +67,15 @@ class LoginOTPFragment : BaseFragment() {
                     CommonState.LoadingShow->showProgressDialog()
                     CommonState.LoadingFinished -> hideProgressDialog()
                     is CommonState.Success -> {
-                        startActivity(MainActivity.newIntent(context))
+                        activity?.finish()
+                        startActivity(MainActivity.newIntent(context).clearActivityStack())
+
                     }
                     is CommonState.Error -> {
                         handleApiErrorWithAlert(it.exception)
                     }
                 }
             }
-
         }
     }
     override fun onDestroyView() {
