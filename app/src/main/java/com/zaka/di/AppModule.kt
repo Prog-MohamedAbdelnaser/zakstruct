@@ -4,6 +4,7 @@ import android.content.Context
 import com.locationpicker.sample.data.sources.local.AppPreferenceConstants.DEFAULT_LOCALE
 import com.locationpicker.sample.data.sources.local.AppPreferenceConstants.PREFERENCE_FILE_NAME
 import com.locationpicker.sample.data.sources.resources.AppResources
+import com.zaka.data.repositories.DeviceInfoRepository
 import com.zaka.data.repositories.LocaleRepository
 import com.zaka.data.repositories.StringsRepository
 import com.zaka.data.sources.local.AppPreference
@@ -39,6 +40,7 @@ val applicationModule = module {
 */
 
 
+    single { DeviceInfoRepository(get(),get()) }
     single { LocaleRepository(get()) }
 
     single(StringQualifier(DEFAULT_LOCALE)) { get<LocaleRepository>().getLocale() }

@@ -9,6 +9,7 @@ import com.base.BaseFragment
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.base.extensions.hide
+import com.zaka.base.extensions.isShow
 import com.zaka.base.extensions.show
 import com.zaka.data.model.LoginParams
 import com.zaka.data.model.RefreshTokenParams
@@ -25,6 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LoginFragment : BaseFragment() {
 
     val loginViewModel:LoginViewModel by viewModel()
+
     private var _binding: FragmentLoginBinding? = null
     override fun layoutResource(): Int  = R.layout.fragment_login
     private  var user: UserProfile?=null
@@ -34,12 +36,12 @@ class LoginFragment : BaseFragment() {
         _binding=FragmentLoginBinding.bind(inflateView)
         initEventHandler()
         loginViewModel.getUserData()
-
 //        loginViewModel.refreshToken(RefreshTokenParams("","" ))
     }
 
     override fun initEventHandler() {
         super.initEventHandler()
+
 
         _binding?.btnLogin?.setOnClickListener {
             loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = "mgafaar-c"))
@@ -47,6 +49,21 @@ class LoginFragment : BaseFragment() {
         _binding?.btnLoginWithFinger?.setOnClickListener {
             loginViewModel.refreshToken()
         }
+
+        loginViewModel      .        enableFingerprintState.observe(this@LoginFragment, Observer {
+            println("enableFingerprintState ${it}")
+
+            when (it) {
+                CommonState.LoadingShow -> showProgressDialog()
+                CommonState.LoadingFinished -> hideProgressDialog()
+                is CommonState.Success -> {
+                    _binding?.loutFingerprint?.isShow(it.data)
+                }
+                is CommonState.Error -> {
+                    handleApiErrorWithAlert(it.exception)
+                }
+            }
+        })
     }
 
      override  suspend fun initModelObservers(coroutineScope: CoroutineScope) {
@@ -81,6 +98,7 @@ class LoginFragment : BaseFragment() {
              }
              }
 
+
              coroutineScope.launch { profileState.collect { it ->
 
                  when (it) {
@@ -91,7 +109,9 @@ class LoginFragment : BaseFragment() {
                          user = it.data
                          _binding?.loginUserName?.text = user!!.displayName
                          _binding?.loginUserPostion?.text = user!!.jobTitle
-                         _binding?.loutFingerprint?.show()
+                         loginViewModel.fetchAppSettings()
+
+
                      }
                      is CommonState.Error -> {
                          _binding?.loginWelcomTitle?.text=resources.getString(R.string.login_title_first_time)

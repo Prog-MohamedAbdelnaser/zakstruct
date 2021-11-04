@@ -12,6 +12,7 @@ import com.zaka.features.profile.vm.ProfileViewModel
 import com.zaka.features.settings.vm.SettingsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : BaseFragment() {
@@ -25,15 +26,19 @@ class SettingsFragment : BaseFragment() {
     override fun onViewInflated(parentView: View, inflateView: View) {
         super.onViewInflated(parentView, inflateView)
         _binding= FragmentSettingsBinding.bind(inflateView)
+        initEventHandler()
         profileViewModel.fetchProfile(true)
         settingsViewModel.fetchAppSettings()
     }
 
     override fun initEventHandler() {
-        super.initEventHandler()
-        _binding?.switchBiometrics!!.setOnCheckedChangeListener { compoundButton, checked ->
+
+        _binding?.switchBiometrics?.setOnCheckedChangeListener { compoundButton, checked ->
+            println("switchBiometrics")
             if (checked){
-               /// settingsViewModel.addDeviceId();
+                settingsViewModel.addDeviceId();
+            }else{
+                settingsViewModel.removeDeviceID()
             }
         }
     }
@@ -57,6 +62,21 @@ class SettingsFragment : BaseFragment() {
                 CommonState.LoadingFinished->hideProgress()
                 is CommonState.Success->{
                     _binding?.switchBiometrics?.isChecked = it.data.enableBiometricManager==true
+                }
+            }
+        }
+
+        coroutineScope.launch {
+            settingsViewModel.addDeviceIdState.collect {
+                when (it) {
+                    CommonState.LoadingShow -> showProgress()
+                    CommonState.LoadingFinished -> hideProgress()
+                    is CommonState.Success -> {
+
+                    }
+                     is CommonState.Error->{
+                         _binding?.switchBiometrics?.isChecked = false
+                     }
                 }
             }
         }

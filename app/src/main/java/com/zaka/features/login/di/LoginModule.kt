@@ -13,5 +13,5 @@ val loginModule = module {
     factory {  get<Retrofit>().create(LoginAPI::class.java)}
     factory { LoginRepository(get(),get(),get()) }
     factory { UserRepository(get()) }
-    viewModel { LoginViewModel(get(),get()) }
+    viewModel { LoginViewModel(get(),get(),get()) }
 }

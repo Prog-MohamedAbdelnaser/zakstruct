@@ -13,12 +13,18 @@ class SettingsRepository(private val  addDeviceIdAPI: SettingsAPI , private val 
      suspend fun addDeviceId(deviceIdParams: AddDeviceIDParams): Flow<APIResponse<String>> {
        return  flow {
            emit(addDeviceIdAPI.addDeviceId(deviceIdParams))
-         }
+         }.onEach {
+             localeRepository.setEnableFingerPrint(true)
+       }
     }
 
     suspend fun fetchAppSettings():Flow<AppSettings>{
         return  flow {
             emit(localeRepository.getSettings())
         }
+    }
+
+    fun removeDeviceID(){
+        localeRepository.setEnableFingerPrint(false)
     }
 }
