@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.base.BaseFragment
 import com.base.biometeric.BiometricAuthListener
 import com.base.biometeric.BiometricUtil
+import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.base.extensions.hide
@@ -42,7 +43,6 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginBinding.bind(inflateView)
         loginViewModel.getUserData()
-        loginViewModel.fetchAppSettings()
 
     }
 
@@ -87,12 +87,9 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
                                 CommonState.LoadingShow -> showProgressDialog()
                                 CommonState.LoadingFinished -> hideProgressDialog()
                                 is CommonState.Success -> {
-                                    startActivityWithFading(
-                                        Intent(
-                                            requireContext(),
-                                            MainActivity::class.java
-                                        )
-                                    )
+                                    activity?.finish()
+                                    startActivity(MainActivity.newIntent(context).clearActivityStack())
+
                                 }
                                 is CommonState.Error -> {
                                     handleApiErrorWithAlert(it.exception)
@@ -111,12 +108,10 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
                                     user = it.data
                                     _binding?.loginUserName?.text = user!!.displayName
                                     _binding?.loginUserPostion?.text = user!!.jobTitle
-
-
+                                    loginViewModel.fetchAppSettings()
                                 }
                                 is CommonState.Error -> {
-                                    _binding?.loginWelcomTitle?.text =
-                                        resources.getString(R.string.login_title_first_time)
+                                    _binding?.loginWelcomTitle?.text = resources.getString(R.string.login_title_first_time)
                                     _binding?.tilUserName?.show()
                                     _binding?.profileImage?.hide()
                                     _binding?.loginUserName?.hide()
