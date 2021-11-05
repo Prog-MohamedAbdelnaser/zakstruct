@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.base.BaseFragment
+import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.databinding.FragmentLoginOtpBinding
