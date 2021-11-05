@@ -8,6 +8,7 @@ import android.graphics.Rect
 import android.os.Build
 import android.view.View
 import androidx.annotation.ColorRes
+import androidx.appcompat.widget.SwitchCompat
 
 inline fun View.hide(){
     this.visibility=View.GONE
@@ -66,6 +67,9 @@ fun scrollTo(view: View, scroll: View, duration: Int=1000) {
     })
     animators.start()
 }
+
+
+
 
 inline fun  View.locateView(): Rect? {
     val v=this

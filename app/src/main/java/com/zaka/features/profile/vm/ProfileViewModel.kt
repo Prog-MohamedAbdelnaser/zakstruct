@@ -1,5 +1,7 @@
 package com.zaka.features.profile.vm
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zaka.domain.UserProfile
@@ -10,8 +12,8 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val profile: FetchProfileUseCase) :ViewModel() {
 
-    private val _profileState = MutableStateFlow<CommonState<UserProfile>>(CommonState.UnInit)
-    val profileState: StateFlow<CommonState<UserProfile>> = _profileState
+    private val _profileState = MutableLiveData<CommonState<UserProfile>>()
+    val profileState: LiveData<CommonState<UserProfile>> = _profileState
 
     fun fetchProfile(cash :Boolean){
         viewModelScope.launch{

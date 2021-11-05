@@ -2,6 +2,9 @@ package com.zaka.features.login.loginotp
 
 import android.os.CountDownTimer
 import android.view.View
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.base.BaseFragment
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
@@ -58,24 +61,26 @@ class LoginOTPFragment : BaseFragment() {
         }.start()
     }
 
-    override suspend fun initModelObservers(coroutineScope: CoroutineScope) {
-
-        loginViewModel.apply {
-            otpState.collect { it ->
-                when (it) {
-                    CommonState.LoadingShow->showProgressDialog()
-                    CommonState.LoadingFinished -> hideProgressDialog()
-                    is CommonState.Success -> {
-                        startActivity(MainActivity.newIntent(context))
+    override  fun initModelObservers() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) { loginViewModel.apply {
+                    otpState.collect { it ->
+                        when (it) {
+                            CommonState.LoadingShow -> showProgressDialog()
+                            CommonState.LoadingFinished -> hideProgressDialog()
+                            is CommonState.Success -> {
+                                startActivity(MainActivity.newIntent(context))
+                            }
+                            is CommonState.Error -> {
+                                handleApiErrorWithAlert(it.exception)
+                            }
+                        }
                     }
-                    is CommonState.Error -> {
-                        handleApiErrorWithAlert(it.exception)
-                    }
-                }
-            }
 
+                } }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

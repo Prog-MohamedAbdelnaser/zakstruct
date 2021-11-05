@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.base.dialogs.CustomProgressDialog
 import com.base.extensions.getDrawableCompat
 import com.zaka.base.extensions.hide
+import com.zaka.base.extensions.show
 import com.zaka.databinding.FragmentBaseBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -44,21 +45,13 @@ abstract  class BaseFragment : Fragment() {
         setHasOptionsMenu(true)
         progressDialog= CustomProgressDialog(requireActivity())
         binding.stub.inflate()
+        initEventHandler()
+
 
     }
 
     open fun onViewInflated(parentView: View, inflateView: View) {
-        initEventHandler()
-        lifecycleScope.launch {
-            // repeatOnLifecycle launches the block in a new coroutine every time the
-            // lifecycle is in the STARTED state (or above) and cancels it when it's STOPPED.
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Trigger the flow and start listening for values.
-                // Note that this happens when lifecycle is STARTED and stops
-                // collecting when the lifecycle is STOPPED
-                initModelObservers(this)
-            }
-        }
+        initModelObservers()
     }
 
     fun startActivityWithFading(intent: Intent){
@@ -66,7 +59,7 @@ abstract  class BaseFragment : Fragment() {
         requireActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
     }
 
-    open suspend fun initModelObservers(coroutineScope: CoroutineScope) {}
+    open fun initModelObservers() {}
 
     open fun initEventHandler(){}
     protected fun hideProgress() {
@@ -78,7 +71,7 @@ abstract  class BaseFragment : Fragment() {
     }
 
     protected fun showProgress() {
-        binding.loadingViewInc.loadingView.hide()
+        binding.loadingViewInc.loadingView.show()
         hideError()
     }
 

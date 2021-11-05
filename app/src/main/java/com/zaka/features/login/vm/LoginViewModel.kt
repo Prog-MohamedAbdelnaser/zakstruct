@@ -25,12 +25,11 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
     private val _refreshSessionState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val refreshSessionState: StateFlow<CommonState<String>> = _refreshSessionState
 
-    private val _enableFingerprintState = MutableLiveData<CommonState<Boolean>>(CommonState.UnInit)
+    private val _enableFingerprintState = MutableLiveData<CommonState<Boolean>>()
     val enableFingerprintState: LiveData<CommonState<Boolean>> = _enableFingerprintState
 
     private val _otpState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val otpState: StateFlow<CommonState<String>> = _otpState
-
 
     private val _profileState = MutableStateFlow<CommonState<UserProfile>>(CommonState.UnInit)
     val profileState: StateFlow<CommonState<UserProfile>> = _profileState
@@ -62,7 +61,6 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
         }
     }
 
-
     fun checkLoggedIn():Boolean{
         return loginRepository.checkLogin()
     }
@@ -82,7 +80,6 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
 
     }
 
-
     fun refreshToken(){
         viewModelScope.launch{
             _refreshSessionState.value = CommonState.LoadingShow
@@ -95,25 +92,12 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
         }
     }
 
-
     fun fetchAppSettings(){
-
         viewModelScope.launch{
-            _enableFingerprintState.value = CommonState.LoadingShow
-            settingsRepository.fetchAppSettings()
-                .catch {it-> _enableFingerprintState.value = CommonState.Error(it) }
-                .onCompletion { _enableFingerprintState.value = CommonState.LoadingFinished }
-                .onEach {
-                    println("fetchAppSettings ${it}")
-                    _enableFingerprintState.value = CommonState.Success(it.enableBiometricManager)
-
-                }
-                .collect {
-                    println("fetchAppSettings ${it}")
-                }
+            println("fetchAppSettings")
+            _enableFingerprintState.value = CommonState.Success(settingsRepository.fetchAppSettings().enableBiometricManager)
         }
     }
-
 
     fun generateOtp(otp:String){
         viewModelScope.launch{
@@ -126,4 +110,5 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
                 }
         }
     }
+
 }
