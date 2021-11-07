@@ -1,5 +1,6 @@
 package com.zaka.features.settings
 
+import android.util.Log
 import android.view.View
 import android.view.ViewStub
 import androidx.lifecycle.Lifecycle
@@ -7,13 +8,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.base.BaseFragment
+import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.databinding.FragmentChatRoomsBinding
 import com.zaka.databinding.FragmentLettersBinding
 import com.zaka.databinding.FragmentSettingsBinding
+import com.zaka.domain.AppLanguages
 import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
+import com.zaka.features.main.MainActivity
 import com.zaka.features.profile.vm.ProfileViewModel
 import com.zaka.features.settings.vm.SettingsViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +30,7 @@ class SettingsFragment : BaseFragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val profileViewModel : ProfileViewModel by viewModel()
     private val settingsViewModel :SettingsViewModel by viewModel()
+    private var initLang = false
 
     override fun layoutResource(): Int = R.layout.fragment_settings
 
@@ -84,6 +89,8 @@ class SettingsFragment : BaseFragment() {
             when(it){
                 is CommonState.Success->{
                     _binding?.switchBiometrics?.isChecked = it.data.enableBiometricManager
+                    _binding?.radioGroupLanguages?.check(if (it.data.languages==AppLanguages.EN)R.id.rButtonEn else R.id.rButtonAr)
+                    initLang = true
                 }
             }
         })
@@ -101,6 +108,20 @@ class SettingsFragment : BaseFragment() {
                    settingsViewModel.removeDeviceID()
                }
            }
+        }
+        _binding?.radioGroupLanguages?.setOnCheckedChangeListener { radioGroup, id ->
+            Log.i("changeLanguage","LANG IS ${radioGroup.isPressed} ")
+
+            if(initLang) {
+               if (id==R.id.rButtonAr){
+                   settingsViewModel.changeLanguage(AppLanguages.AR)
+               }else{
+                   settingsViewModel.changeLanguage(AppLanguages.EN)
+               }
+                startActivity(MainActivity.newIntent(context).clearActivityStack())
+                requireActivity().overridePendingTransition(0, 0)
+                requireActivity().finish()
+            }
         }
     }
 

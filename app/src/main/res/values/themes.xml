@@ -237,4 +237,9 @@
     <style name="TextAppearance.InActiveBottomNavigationText">
         <item name="android:textColor">@color/dark_blue_grey</item>
     </style>
+    <style name="RadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton" >
+        <item name="android:buttonTint">@color/radio_button_color</item>
+        <item name="android:textAppearance">@style/TextAppearanceRegular.greyish_brown</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

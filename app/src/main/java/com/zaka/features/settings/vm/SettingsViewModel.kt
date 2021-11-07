@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.zaka.data.model.AddDeviceIDParams
 import com.zaka.data.repositories.DeviceInfoRepository
 import com.zaka.data.repositories.SettingsRepository
+import com.zaka.domain.AppLanguages
 import com.zaka.domain.AppSettings
 import com.zaka.features.common.CommonState
 import kotlinx.coroutines.flow.*
@@ -43,4 +44,7 @@ class SettingsViewModel(private val  settingsRepository: SettingsRepository,
         settingsRepository.removeDeviceID()
     }
 
+    fun changeLanguage(appLanguages: AppLanguages){
+        settingsRepository.changeLanguage(appLanguages)
+    }
 }

@@ -4,6 +4,7 @@ import com.zaka.data.model.AddDeviceIDParams
 
 import com.zaka.data.sources.remote.api.SettingsAPI
 import com.zaka.domain.APIResponse
+import com.zaka.domain.AppLanguages
 import com.zaka.domain.AppSettings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,5 +31,9 @@ class SettingsRepository(private val  addDeviceIdAPI: SettingsAPI , private val 
 
     fun removeDeviceID(){
         localeRepository.setEnableFingerPrint(false)
+    }
+
+    fun changeLanguage(appLanguages: AppLanguages){
+        localeRepository.setLanguage(appLanguages)
     }
 }
