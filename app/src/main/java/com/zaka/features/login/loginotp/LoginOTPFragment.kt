@@ -2,6 +2,7 @@ package com.zaka.features.login.loginotp
 
 import android.os.CountDownTimer
 import android.view.View
+import android.widget.Toast
 import com.base.BaseFragment
 import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
@@ -33,11 +34,17 @@ class LoginOTPFragment : BaseFragment() {
     override fun initEventHandler() {
         super.initEventHandler()
         _binding?.btnVerify?.setOnClickListener {
-            loginViewModel.confirmOtp(_binding!!.otpView.text.toString())
+            if(_binding?.otpView?.itemCount!! <4){
+                Toast.makeText(context, "Please enter the 4 digits code ", Toast.LENGTH_SHORT)
+                    .show()
+            }else{
+                loginViewModel.confirmOtp(_binding!!.otpView.text.toString())
+            }
         }
 
         _binding?.textResendCode?.setOnClickListener {
             startResendCounter()
+            loginViewModel.generateOtp("")
         }
     }
 
@@ -70,6 +77,20 @@ class LoginOTPFragment : BaseFragment() {
                         activity?.finish()
                         startActivity(MainActivity.newIntent(context).clearActivityStack())
 
+                    }
+                    is CommonState.Error -> {
+                        handleApiErrorWithAlert(it.exception)
+                    }
+                }
+            }
+
+
+            generateOtpState.collect { it ->
+                when (it) {
+                    CommonState.LoadingShow->showProgressDialog()
+                    CommonState.LoadingFinished -> hideProgressDialog()
+                    is CommonState.Success -> {
+                        startResendCounter()
                     }
                     is CommonState.Error -> {
                         handleApiErrorWithAlert(it.exception)
