@@ -1,25 +1,32 @@
 package com.zaka.features.login.vm
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zaka.data.model.LoginParams
 import com.zaka.data.model.RefreshTokenParams
 import com.zaka.data.repositories.LoginRepository
+import com.zaka.data.repositories.SettingsRepository
 import com.zaka.domain.UserProfile
 import com.zaka.domain.usecases.FetchProfileUseCase
 import com.zaka.features.common.CommonState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val loginRepository: LoginRepository,private val profile: FetchProfileUseCase) :ViewModel() {
+class LoginViewModel(private val loginRepository: LoginRepository,
+                     private val profile: FetchProfileUseCase,
+private  val settingsRepository: SettingsRepository) :ViewModel() {
 
     private val _loginState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val loginState: StateFlow<CommonState<String>> = _loginState
 
     private val _refreshSessionState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val refreshSessionState: StateFlow<CommonState<String>> = _refreshSessionState
+
+    private val _enableFingerprintState = MutableLiveData<CommonState<Boolean>>()
+    val enableFingerprintState: LiveData<CommonState<Boolean>> = _enableFingerprintState
 
     private val _otpState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
     val otpState: StateFlow<CommonState<String>> = _otpState
@@ -58,7 +65,6 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
         }
     }
 
-
     fun checkLoggedIn():Boolean{
         return loginRepository.checkLogin()
     }
@@ -78,7 +84,6 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
 
     }
 
-
     fun refreshToken(){
         viewModelScope.launch{
             _refreshSessionState.value = CommonState.LoadingShow
@@ -91,6 +96,14 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
         }
     }
 
+    fun fetchAppSettings(){
+        viewModelScope.launch{
+            println("fetchAppSettings")
+            _enableFingerprintState.value = CommonState.Success(settingsRepository.fetchAppSettings().enableBiometricManager)
+        }
+    }
+
+    fun generateOtp(otp:String){
     fun generateOtp(phone:String){
         viewModelScope.launch{
             _generateOtpState.value = CommonState.LoadingShow
@@ -102,4 +115,5 @@ class LoginViewModel(private val loginRepository: LoginRepository,private val pr
                 }
         }
     }
+
 }

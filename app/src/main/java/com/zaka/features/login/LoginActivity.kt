@@ -8,20 +8,23 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.zaka.R
+import com.zaka.data.repositories.DeviceInfoRepository
 import com.zaka.databinding.ActivityLoginBinding
 import com.zaka.databinding.ActivityMainBinding
+import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val navView: BottomNavigationView = binding.navView
+        println("getDeviceIdFromSetting login")
+
+    //        val navView: BottomNavigationView = binding.navView
 //
 //        val navController = findNavController(R.id.nav_host_fragment_activity_main)
 //        // Passing each menu ID as a set of Ids because each
