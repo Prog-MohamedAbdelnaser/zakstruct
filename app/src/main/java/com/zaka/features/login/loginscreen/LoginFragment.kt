@@ -16,6 +16,7 @@ import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
 import com.zaka.base.extensions.hide
+import com.zaka.base.extensions.invisible
 import com.zaka.base.extensions.isShow
 import com.zaka.base.extensions.show
 import com.zaka.data.model.LoginParams

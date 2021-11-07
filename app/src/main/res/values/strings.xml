@@ -23,6 +23,18 @@
     <string name="login_with_another_account">Login with another account</string>
     <string name="login_forget_pass">Forget Password?</string>
 
+    <string name="login_pass_hint">Password</string>
+    <string name="login_user_hint">Username</string>
+    <string name="login_btn_hint">login</string>
+    <string name="login_or_hint">OR</string>
+
+    <string name="login_biometric_hint">Use Your Finger To Login</string>
+
+
+
+
+
+
 
 
 
@@ -32,6 +44,8 @@
     <string name="login_otp_timer">02 : 20 secs</string>
     <string name="login_otp_not_received">Didn’t Recieve the Code?</string>
     <string name="login_otp_resend">Resend Code</string>
+    <string name="login_otp_verfiy">Verify</string>
+
     <string name="check_your_network_connection_and_try_again">StringsRepository</string>
     <string name="timeout_error_message">timeout_error_message</string>
     <string name="biometrics_label">Biometrics</string>
