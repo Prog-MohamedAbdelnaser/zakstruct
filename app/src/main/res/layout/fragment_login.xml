@@ -33,7 +33,7 @@
         android:layout_marginTop="14.7dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textSize="20sp"
         style="@style/labelMeduim"
         android:text="@string/login_header_ar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,34 +73,31 @@
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:src="@drawable/avatar"
         app:civ_border_width="3dp"
         android:layout_marginTop="23dp"
         app:civ_border_color="#43afba"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/login_welcom_title"
         app:layout_constraintTop_toBottomOf="@+id/login_welcom_title"/>
 
     <TextView
         android:id="@+id/login_user_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="14dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="18sp"
         style="@style/label"
         android:text="@string/login_user_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
     <TextView
         android:id="@+id/login_user_postion"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -109,8 +106,7 @@
         android:textSize="14sp"
         style="@style/label"
         android:text="@string/login_user_postion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
         app:layout_constraintTop_toBottomOf="@+id/login_user_name" />
 
     <TextView
@@ -129,13 +125,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_user_postion" />
-
+<androidx.constraintlayout.widget.Barrier
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:barrierDirection="bottom"
+    android:id="@+id/barrier"
+    app:constraint_referenced_ids="login_user_name,login_user_postion,profile_image,tilUserName"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUserName"
         android:layout_width="0dp"
         android:layout_height="58dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
         style="@style/MaterialTextField"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
@@ -145,14 +146,14 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_another_account">
+        app:layout_constraintTop_toBottomOf="@+id/login_user_postion">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsername"
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Username"
+            android:hint="@string/login_user_hint"
             android:background="@drawable/background_input_login"
             android:inputType="text"
             android:maxLines="1"
@@ -165,7 +166,7 @@
         android:id="@+id/tilPassWord"
         android:layout_width="0dp"
         android:layout_height="58dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         style="@style/MaterialTextField"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
@@ -176,14 +177,14 @@
         app:hintTextColor="@color/steel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilUserName">
+        app:layout_constraintTop_toBottomOf="@+id/barrier">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Password"
+            android:hint="@string/login_pass_hint"
             android:background="@drawable/background_input_login"
             android:inputType="text"
             android:maxLines="1"
@@ -219,7 +220,7 @@
         android:layout_width="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
@@ -230,7 +231,8 @@
             style="@style/TextAppearanceMedium.White"
             android:textSize="13sp"
             android:lineSpacingExtra="7sp"
-            android:text="OR"/>
+            android:layout_marginBottom="20dp"
+            android:text="@string/login_or_hint"/>
         <ImageView
             android:id="@+id/btnLoginWithFinger"
             android:layout_width="wrap_content"
@@ -244,7 +246,7 @@
             android:textSize="13sp"
             android:layout_marginTop="12dp"
             android:lineSpacingExtra="7sp"
-            android:text="Use Your Finger To Login"/>
+            android:text="@string/login_biometric_hint"/>
     </LinearLayout>
     <TextView
         android:id="@+id/login_forgot_pass"

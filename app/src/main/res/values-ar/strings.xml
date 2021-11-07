@@ -15,7 +15,7 @@
     <string name="login_header_ar">هيئة الزكاة والضريبة والجمارك</string>
     <string name="login_header_en">Zakat,Tax,Customs Authority</string>
 
-    <string name="login_title">Welome back</string>
+    <string name="login_title">مرحبا بعودتك</string>
     <string name="login_title_first_time">Welcome to Executives App</string>
 
     <string name="login_user_name">Mr. Abdullah Al Hossen</string>
@@ -23,13 +23,11 @@
     <string name="login_with_another_account">Login with another account</string>
     <string name="login_forget_pass">Forget Password?</string>
 
-    <string name="login_pass_hint">Password</string>
-    <string name="login_user_hint">Username</string>
-    <string name="login_btn_hint">login</string>
-    <string name="login_or_hint">OR</string>
-
-    <string name="login_biometric_hint">Use Your Finger To Login</string>
-
+    <string name="login_pass_hint">كلمة السر</string>
+    <string name="login_user_hint">إسم المستخدم</string>
+    <string name="login_btn_hint">تسجيل الدخول</string>
+    <string name="login_or_hint">أو</string>
+    <string name="login_biometric_hint">الدخول بالبصمة</string>
 
 
 
@@ -39,12 +37,13 @@
 
 
 
-    <string name="login_otp_header">Enter OTP</string>
-    <string name="login_otp_description">OTP code has been sent to you via SMS for the mobile number that ends with******9895</string>
+
+    <string name="login_otp_header">أدخل رمز التحقق</string>
+    <string name="login_otp_description">تم إرسال رمز التحقق إليك عبر رسالة نصية قصيرة لرقم الجوال الذى ينتهى ب *****9895</string>
     <string name="login_otp_timer">02 : 20 secs</string>
-    <string name="login_otp_not_received">Didn’t Recieve the Code?</string>
-    <string name="login_otp_resend">Resend Code</string>
-    <string name="login_otp_verfiy">Verify</string>
+    <string name="login_otp_not_received">لم يصلك الرمز؟</string>
+    <string name="login_otp_resend">إعادة الإرسال</string>
+    <string name="login_otp_verfiy">تحقق</string>
 
     <string name="check_your_network_connection_and_try_again">StringsRepository</string>
     <string name="timeout_error_message">timeout_error_message</string>
