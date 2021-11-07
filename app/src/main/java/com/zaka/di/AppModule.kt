@@ -48,10 +48,6 @@ val applicationModule = module {
     factory(StringQualifier(KEY_CURRENT_LANGUAGE)) { get<LocaleRepository>().getLanguage() }
 
 
-    factory(StringQualifier(KEY_USER_TOKEN)) { get<LocaleRepository>().getUserToken() }
-
-
-
     single(StringQualifier(KEY_GLIDE_OKHTTP_CLIENT)) {
         OkHttpClient.Builder()
                 .sslSocketFactory(

@@ -71,6 +71,7 @@ class LoginOTPFragment : BaseFragment() {
                             CommonState.LoadingFinished -> hideProgressDialog()
                             is CommonState.Success -> {
                                 startActivity(MainActivity.newIntent(context))
+                                requireActivity().finish()
                             }
                             is CommonState.Error -> {
                                 handleApiErrorWithAlert(it.exception)

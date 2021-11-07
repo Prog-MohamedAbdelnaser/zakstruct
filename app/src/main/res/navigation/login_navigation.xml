@@ -15,7 +15,6 @@
             app:destination="@id/loginOTPFragment"
 
             app:popUpToInclusive="true"
-            app:popUpTo="@id/login_navigation"
             />
     </fragment>
     <fragment

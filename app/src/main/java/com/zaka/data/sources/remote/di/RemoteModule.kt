@@ -26,7 +26,7 @@ val remoteModule = module {
     val keyErrorHandlerInterceptor = "ErrorHandlerInterceptor"
     val keyRetrofitOkHttpClient = "RetrofitOkHttpClient"
 
-    single<Interceptor>(StringQualifier(keyHeadersInterceptor)) { HeadersInterceptor() }
+    single<Interceptor>(StringQualifier(keyHeadersInterceptor)) { HeadersInterceptor(get()) }
 
     single<Interceptor>(StringQualifier(keyHttpLoggingInterceptor)) { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) }
 
