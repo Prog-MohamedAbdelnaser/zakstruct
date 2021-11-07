@@ -1,6 +1,6 @@
 package com.zaka.data.repositories
 
-import com.zaka.data.repositories.RepositoriesConstants.KEY_PREFRENCE_TOKEN
+import com.zaka.data.repositories.RepositoriesConstants.KEY_PREFRENCE_OTP_TOKEN
 import com.zaka.data.repositories.RepositoriesConstants.KEY_PREFRENCE_USER
 import com.zaka.data.sources.local.AppPreference
 import com.zaka.domain.UserToken
@@ -19,20 +19,26 @@ class UserRepository (private val appPreference: AppPreference){
 
     //from login
     fun saveUserData(oTPToken: OTPToken){
-        appPreference.putString(KEY_PREFRENCE_TOKEN, oTPToken.token.toString())
+        appPreference.putString(KEY_PREFRENCE_OTP_TOKEN, oTPToken.token.toString())
     }
 
     //from otp
     fun saveTokenAfterOTPVerification(user: UserToken){
         appPreference.saveObject(KEY_PREFRENCE_USER,user)
-        appPreference.putString(KEY_PREFRENCE_TOKEN, user.token.toString())
     }
 
+    fun getOtpToken(): String {
+        return appPreference.getString(KEY_PREFRENCE_OTP_TOKEN,"")?:""
+    }
 
-
+    fun getUserToken():String{
+        return if (getLogedInUser()!=null)
+              getLogedInUser()?.token?:""
+        else ""
+    }
     fun clear(){
         appPreference.saveObject(KEY_PREFRENCE_USER,null)
-        appPreference.putString(KEY_PREFRENCE_TOKEN, "")
+        appPreference.putString(KEY_PREFRENCE_OTP_TOKEN, "")
 
     }
 }

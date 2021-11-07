@@ -12,7 +12,7 @@ object RepositoriesConstants {
     const val KEY_PREFRENCE_USER = "USER"
     const val KEY_PREFRENCE_USER_PROFILE = "USERPROfile"
     const val KEY_PREFRENCE_USER_PRIVILEGE = "USER_PRIVILEGE"
-    const val KEY_PREFRENCE_TOKEN = "token"
+    const val KEY_PREFRENCE_OTP_TOKEN = "otp_token"
 
     const val KEY_FIREBASE_TOKEN = "FIREBASE_TOKEN"
 
