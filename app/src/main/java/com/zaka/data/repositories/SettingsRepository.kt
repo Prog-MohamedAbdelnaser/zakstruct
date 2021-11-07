@@ -15,7 +15,6 @@ import kotlinx.coroutines.withContext
 class SettingsRepository(private val  addDeviceIdAPI: SettingsAPI , private val localeRepository: LocaleRepository) {
 
      suspend fun addDeviceId(deviceIdParams: AddDeviceIDParams): Flow<APIResponse<String>> {
-         localeRepository.setEnableFingerPrint(true)
        return  flow {
            emit(addDeviceIdAPI.addDeviceId(deviceIdParams))
          }.onEach {
