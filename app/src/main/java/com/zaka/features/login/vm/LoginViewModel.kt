@@ -103,7 +103,7 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
         }
     }
 
-    fun generateOtp(otp:String){
+
     fun generateOtp(phone:String){
         viewModelScope.launch{
             _generateOtpState.value = CommonState.LoadingShow

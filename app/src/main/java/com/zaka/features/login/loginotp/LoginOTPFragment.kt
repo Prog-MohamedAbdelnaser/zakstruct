@@ -85,9 +85,11 @@ class LoginOTPFragment : BaseFragment() {
                         }
                     }
 
-                } }
+                }
 
+            }
 
+            loginViewModel.
             generateOtpState.collect { it ->
                 when (it) {
                     CommonState.LoadingShow->showProgressDialog()
@@ -100,8 +102,6 @@ class LoginOTPFragment : BaseFragment() {
                     }
                 }
             }
-
-
     }
     }
 
