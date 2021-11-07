@@ -64,23 +64,8 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
 
 
     override fun initModelObservers() {
-        lifecycleScope.launchWhenCreated {
-            loginViewModel.apply {
+        lifecycleScope.launch { loginViewModel.apply {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    launch {
-                        loginState.collect {
-                            when (it) {
-                                CommonState.LoadingShow -> showProgressDialog()
-                                CommonState.LoadingFinished -> hideProgressDialog()
-                                is CommonState.Success -> {
-                                    findNavController().navigate(R.id.action_loginFragment_to_loginOTPFragment)
-                                }
-                                is CommonState.Error -> {
-                                    handleApiErrorWithAlert(it.exception)
-                                }
-                            }
-                        }
-                    }
                     launch {
                         refreshSessionState.collect {
                             when (it) {
@@ -122,8 +107,7 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
                         }
                     }
                 }
-            }
-        }
+            } }
         loginViewModel.enableFingerprintState.observe(this@LoginFragment, {
             println("enableFingerprintState ${it}")
             when (it) {
@@ -137,9 +121,21 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
                 }
             }
         })
-
+        loginViewModel.observeLogin(this, { handleLoginState(it) })
     }
 
+    private fun handleLoginState(state:CommonState<String>){
+        when (state) {
+            CommonState.LoadingShow -> showProgressDialog()
+            CommonState.LoadingFinished -> hideProgressDialog()
+            is CommonState.Success -> {
+                findNavController().navigate(R.id.loginOTPFragment)
+            }
+            is CommonState.Error -> {
+                handleApiErrorWithAlert(state.exception)
+            }
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
