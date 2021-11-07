@@ -42,7 +42,7 @@ class ApplicationClass : Application() {
             ))
         }
 
-
+//        Passport.validatorFactory { TextInputLayoutValidator() }
 
 
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
@@ -71,6 +71,9 @@ class ApplicationClass : Application() {
             }
 
         })
+
+
+
     }
 
     override fun attachBaseContext(base: Context) {

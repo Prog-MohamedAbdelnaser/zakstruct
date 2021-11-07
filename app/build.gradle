@@ -116,6 +116,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
 
 
+    // validations
+//    implementation 'com.github.deadpixelsociety.passport:core:2.2'
+//    implementation 'com.github.deadpixelsociety.passport:material:2.2'
+//    implementation 'com.github.deadpixelsociety.passport:fragment:2.2'
 
 
 
