@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/drawable/background_button_login.xml" value="0.1" />
+        <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/drawable/background_input_login.xml" value="0.2484375" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/drawable/ic_baseline_calendar_today.xml" value="0.2484375" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/drawable/ic_letters.xml" value="0.2484375" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/drawable/ic_reports.xml" value="0.2484375" />
+        <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/drawable/otp_active_background.xml" value="0.2484375" />
+        <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/drawable/otp_inactive_background.xml" value="0.11458333333333333" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/font/my_sst_font.xml" value="0.2625" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/activity_login.xml" value="0.23229166666666667" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -16,11 +19,14 @@
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/fragment_dashboard.xml" value="0.23229166666666667" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/fragment_letters.xml" value="0.23229166666666667" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/fragment_letters_list.xml" value="0.23229166666666667" />
-        <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/fragment_login.xml" value="0.21666666666666667" />
+        <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/fragment_login.xml" value="0.4" />
+        <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/fragment_login_otp.xml" value="0.21666666666666667" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/fragment_reports.xml" value="0.264" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/fragment_settings.xml" value="0.23229166666666667" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/letter_list_item.xml" value="0.2" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/loading.xml" value="0.23229166666666667" />
+        <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/messages_item.xml" value="0.1" />
+        <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/otp_layout.xml" value="0.23229166666666667" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/layout/place_holder_layout.xml" value="0.4" />
         <entry key="..\:/workspace/rent-space/zaka/app/src/main/res/menu/bottom_nav_menu.xml" value="0.23229166666666667" />
       </map>

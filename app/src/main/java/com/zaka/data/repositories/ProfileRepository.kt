@@ -12,6 +12,7 @@ class ProfileRepository(private val  profileAPI: ProfileAPI, private val appPref
 
     suspend fun fetchRemote(): Flow<UserProfile> {
        return  flow {
+          // emit(fetchProfileLocal()!!)
            emit(profileAPI.fetchProfile().payload!!)
          }.onEach {
            saveProfile(it)

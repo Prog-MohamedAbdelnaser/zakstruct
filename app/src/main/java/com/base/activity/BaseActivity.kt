@@ -1,15 +1,30 @@
 package com.base.activity
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.base.dialogs.CustomProgressDialog
+import com.zaka.di.LanguageUseCaseProvider
 
 abstract class BaseActivity : AppCompatActivity() {
 
-  /*  override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(LanguageUseCaseProvider.getLanguageUseCase(base).execute(base))
-    }*/
+
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LanguageUseCaseProvider.getLanguageUseCase(base).wrap(base))
+    }
+
+    override fun applyOverrideConfiguration(overrideConfiguration: Configuration?) {
+        println("overrideConfiguration ${overrideConfiguration}")
+        if (overrideConfiguration != null) {
+            val uiMode = overrideConfiguration.uiMode
+            overrideConfiguration.setTo(baseContext.resources.configuration)
+            overrideConfiguration.uiMode = uiMode
+        }
+        super.applyOverrideConfiguration(overrideConfiguration)
+
+    }
 
     fun showProgressDialog(){
         progressDialog.show()
@@ -21,16 +36,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
     lateinit var progressDialog: CustomProgressDialog
-
-    override fun applyOverrideConfiguration(overrideConfiguration: Configuration?) {
-        if (overrideConfiguration != null) {
-            val uiMode = overrideConfiguration.uiMode
-            overrideConfiguration.setTo(baseContext.resources.configuration)
-            overrideConfiguration.uiMode = uiMode
-        }
-        super.applyOverrideConfiguration(overrideConfiguration)
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

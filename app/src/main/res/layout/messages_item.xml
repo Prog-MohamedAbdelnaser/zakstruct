@@ -29,7 +29,6 @@
         android:textSize="14sp"
         android:maxWidth="180dp"
         style="@style/labelMeduim.NavyBlue"
-        android:text="@string/login_user_name"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
         app:layout_constraintTop_toTopOf="@+id/profile_image" />
 

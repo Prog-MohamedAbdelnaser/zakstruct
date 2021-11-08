@@ -56,7 +56,7 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
             }else{
                 _binding?.etUsername?.text.toString()
             }
-            loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = username))
+            loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = "elnaser"))
         }
         _binding?.btnLoginWithFinger?.setOnClickListener {
             BiometricUtil.showBiometricPrompt(
@@ -80,7 +80,6 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
                                 is CommonState.Success -> {
                                     activity?.finish()
                                     startActivity(MainActivity.newIntent(context).clearActivityStack())
-
                                 }
                                 is CommonState.Error -> {
                                     handleApiErrorWithAlert(it.exception)

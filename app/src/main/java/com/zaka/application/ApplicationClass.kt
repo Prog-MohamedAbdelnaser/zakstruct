@@ -16,6 +16,7 @@ import com.zaka.features.profile.di.profileModule
 import com.zaka.features.settings.di.settingsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 
 class ApplicationClass : Application() {
@@ -42,6 +43,9 @@ class ApplicationClass : Application() {
             ))
         }
 
+        if (BuildConfig.DEBUG) {
+        }
+        Timber.plant(Timber.DebugTree())
 
 
 

@@ -90,8 +90,9 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="18sp"
-        style="@style/label"
-        android:text="@string/login_user_name"
+        tools:text="mohamed "
+        android:paddingTop="8dp"
+        style="@style/TextAppearanceBold.White"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
         app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
@@ -100,12 +101,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="14sp"
-        style="@style/label"
-        android:text="@string/login_user_postion"
+        tools:text="ceo "
+        style="@style/TextAppearanceMedium.White"
+
         app:layout_constraintStart_toEndOf="@+id/profile_image"
         app:layout_constraintTop_toBottomOf="@+id/login_user_name" />
 
@@ -144,6 +145,7 @@
         app:startIconTint="@color/text_input_icon_color_selector"
         app:hintTextColor="@color/steel"
         android:visibility="gone"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_user_postion">
@@ -185,7 +187,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/login_pass_hint"
-            android:background="@drawable/background_input_login"
             android:inputType="text"
             android:maxLines="1"
 
@@ -195,19 +196,15 @@
 
 
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
+        style="@style/MaterialAppButton"
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textAllCaps="true"
-        android:minWidth="100dp"
-        android:background="@drawable/background_button_login"
-        app:shapeAppearance="@drawable/background_button_login"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:text="login"
-        android:textColor="@color/white"
+        android:text="@string/login_button"
         app:layout_constraintTop_toBottomOf="@+id/tilPassWord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

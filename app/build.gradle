@@ -114,6 +114,8 @@ dependencies {
 
     implementation 'com.chaos.view:pinview:1.4.4'
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
+    implementation 'com.github.aabhasr1:OtpView:1.0.6'
 
 
 

@@ -8,13 +8,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.base.activity.BaseActivity
 import com.zaka.R
 import com.zaka.data.repositories.DeviceInfoRepository
 import com.zaka.databinding.ActivityLoginBinding
 import com.zaka.databinding.ActivityMainBinding
 import org.koin.android.ext.android.inject
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     lateinit var navController:NavController
