@@ -38,8 +38,11 @@ class ErrorHandlerInterceptor(private val stringsRepository: StringsRepository) 
             }
         }
         val body = response.body!!
+        Timber.i("ErrorIntercept: %s", response.message)
+
         // Only intercept JSON type responses and ignore the rest.
         if (isJsonTypeResponse(body)) {
+
             var message = ""
             var code = successCode // Assume default OK
             var status = successStatus
@@ -52,6 +55,7 @@ class ErrorHandlerInterceptor(private val stringsRepository: StringsRepository) 
                 val json = buffer.clone().readString(charset)
                 val obj = JsonParser().parse(json)
                 // Capture error code an message_received.
+
                 if (obj is JsonObject && obj.has(keyStatus)) {
                     status = obj.get(keyStatus).asString
                 }
@@ -66,7 +70,7 @@ class ErrorHandlerInterceptor(private val stringsRepository: StringsRepository) 
 
                 }
             } catch (e: Exception) {
-                Timber.i("Error: %s", e.message)
+                Timber.i("ErrorIntercept: %s", e.message)
                 throw e
             }
 
@@ -74,9 +78,14 @@ class ErrorHandlerInterceptor(private val stringsRepository: StringsRepository) 
             // Anything above 400 is treated as a server error.
             if (status == successStatus) {
             }else{
+                Timber.i("ErrorIntercept: %s", "UNknown")
+
                 throw APIException(code, message)
 
             }
+        }else{
+            Timber.i("ErrorIntercept: else parsing",)
+            throw APIException(code = response.code.toString(),stringsRepository.getUnknownErrorMessage())
         }
 
         return response

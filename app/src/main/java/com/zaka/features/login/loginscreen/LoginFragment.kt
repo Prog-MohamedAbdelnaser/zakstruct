@@ -56,7 +56,7 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
             }else{
                 _binding?.etUsername?.text.toString()
             }
-            loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = "elnaser"))
+            loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = username))
         }
         _binding?.btnLoginWithFinger?.setOnClickListener {
             BiometricUtil.showBiometricPrompt(

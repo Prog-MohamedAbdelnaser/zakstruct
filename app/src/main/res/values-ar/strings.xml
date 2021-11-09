@@ -42,5 +42,6 @@
     <string name="language">اللغة</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="login_button">تسجيل الدخول</string>
+    <string name="unknown_error_message">unknown error!</string>
 
 </resources>
