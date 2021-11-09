@@ -173,6 +173,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         app:passwordToggleEnabled="true"
+        app:passwordToggleDrawable="@drawable/ic_password_toggle"
         app:passwordToggleTint="@color/text_input_icon_color_selector"
         app:startIconDrawable="@drawable/ic_icon_outlined_action_lock_locked"
         app:startIconTint="@color/text_input_icon_color_selector"
