@@ -118,6 +118,10 @@ dependencies {
     implementation 'com.github.aabhasr1:OtpView:1.0.6'
 
 
+    // validations
+//    implementation 'com.github.deadpixelsociety.passport:core:2.2'
+//    implementation 'com.github.deadpixelsociety.passport:material:2.2'
+//    implementation 'com.github.deadpixelsociety.passport:fragment:2.2'
 
 
 

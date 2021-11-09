@@ -51,12 +51,18 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
         super.initEventHandler()
 
         _binding?.btnLogin?.setOnClickListener {
-           val username =  if (user!=null){
-                user?.mailNickname
+            if(_binding?.etPassword!!.text.isNullOrEmpty()||_binding?.etUsername!!.text.isNullOrEmpty()){
+                Toast.makeText(context, "Please enter the required fields", Toast.LENGTH_SHORT)
+                    .show()
             }else{
-                _binding?.etUsername?.text.toString()
+
+                    val username =  if (user!=null){
+                        user?.mailNickname
+                    }else{
+                        _binding?.etUsername?.text.toString()
+                    }
+                    loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = username))
             }
-            loginViewModel.login(LoginParams(password = _binding?.etPassword!!.text.toString(),username = username))
         }
         _binding?.btnLoginWithFinger?.setOnClickListener {
             BiometricUtil.showBiometricPrompt(
@@ -98,6 +104,7 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
                                     user = it.data
                                     _binding?.loginUserName?.text = user!!.displayName
                                     _binding?.loginUserPostion?.text = user!!.jobTitle
+                                    _binding?.etUsername?.setText(user!!.mailNickname)
                                     loginViewModel.fetchAppSettings()
                                 }
                                 is CommonState.Error -> {

@@ -75,6 +75,9 @@ class ApplicationClass : Application() {
             }
 
         })
+
+
+
     }
 
     override fun attachBaseContext(base: Context) {

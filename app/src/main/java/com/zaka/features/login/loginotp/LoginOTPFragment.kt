@@ -10,6 +10,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -53,6 +54,7 @@ class LoginOTPFragment : BaseFragment() {
 
         _binding?.textResendCode?.setOnClickListener {
             startResendCounter()
+            loginViewModel.generateOtp("")
         }
         checkOtp()
     }
@@ -161,8 +163,24 @@ class LoginOTPFragment : BaseFragment() {
                         }
                     }
 
-                } }
-        }
+                }
+
+            }
+
+            loginViewModel.
+            generateOtpState.collect { it ->
+                when (it) {
+                    CommonState.LoadingShow->showProgressDialog()
+                    CommonState.LoadingFinished -> hideProgressDialog()
+                    is CommonState.Success -> {
+                        startResendCounter()
+                    }
+                    is CommonState.Error -> {
+                        handleApiErrorWithAlert(it.exception)
+                    }
+                }
+            }
+    }
     }
 
     override fun onDestroyView() {

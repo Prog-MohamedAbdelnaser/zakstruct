@@ -31,6 +31,10 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
     private val _profileState = MutableStateFlow<CommonState<UserProfile>>(CommonState.UnInit)
     val profileState: StateFlow<CommonState<UserProfile>> = _profileState
 
+
+    private val _generateOtpState = MutableStateFlow<CommonState<String>>(CommonState.UnInit)
+    val generateOtpState: StateFlow<CommonState<String>> = _generateOtpState
+
     fun login(loginParams: LoginParams){
         viewModelScope.launch{
             _loginState.value = CommonState.LoadingShow
@@ -96,14 +100,15 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
         }
     }
 
-    fun generateOtp(otp:String){
+
+    fun generateOtp(phone:String){
         viewModelScope.launch{
-            _otpState.value = CommonState.LoadingShow
-            loginRepository.confirmOtp(otp)
-                .catch {it-> _otpState.value = CommonState.Error(it) }
-                .onCompletion { _otpState.value = CommonState.LoadingFinished }
+            _generateOtpState.value = CommonState.LoadingShow
+            loginRepository.generateOtp(phone)
+                .catch {it-> _generateOtpState.value = CommonState.Error(it) }
+                .onCompletion { _generateOtpState.value = CommonState.LoadingFinished }
                 .collect {
-                    _otpState.value = CommonState.Success("it")
+                    _generateOtpState.value = CommonState.Success("it")
                 }
         }
     }
