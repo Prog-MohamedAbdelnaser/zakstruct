@@ -26,6 +26,8 @@
     <string name="login_btn_hint">تسجيل الدخول</string>
     <string name="login_or_hint">أو</string>
     <string name="login_biometric_hint">الدخول بالبصمة</string>
+    <string name="login_inputs_error_message">من فضلك أدخل البيانات المطلوبة</string>
+
 
     <string name="login_otp_header">أدخل رمز التحقق</string>
     <string name="login_otp_description">تم إرسال رمز التحقق إليك عبر رسالة نصية قصيرة لرقم الجوال الذى ينتهى ب *****9895</string>
@@ -33,6 +35,8 @@
     <string name="login_otp_not_received">لم يصلك الرمز؟</string>
     <string name="login_otp_resend">إعادة الإرسال</string>
     <string name="login_otp_verfiy">تحقق</string>
+    <string name="login_otp_error_message">رمز التحقق الذى أدخلته غير صحيح</string>
+
 
     <string name="check_your_network_connection_and_try_again">StringsRepository</string>
     <string name="timeout_error_message">timeout_error_message</string>

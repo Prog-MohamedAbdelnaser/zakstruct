@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.zaka.data.model.AddDeviceIDParams
 import com.zaka.data.repositories.DeviceInfoRepository
 import com.zaka.data.repositories.SettingsRepository
+import com.zaka.data.repositories.UserRepository
 import com.zaka.domain.AppLanguages
 import com.zaka.domain.AppSettings
 import com.zaka.features.common.CommonState
@@ -15,7 +16,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(private val  settingsRepository: SettingsRepository,
-                        private  val  deviceInfoRepository: DeviceInfoRepository) :ViewModel() {
+                        private  val  deviceInfoRepository: DeviceInfoRepository,
+                        private val userRepository: UserRepository) :ViewModel() {
 
     private val _addDeviceIdState = MutableLiveData<CommonState<String>>()
     val addDeviceIdState: LiveData<CommonState<String>> = _addDeviceIdState
@@ -46,5 +48,9 @@ class SettingsViewModel(private val  settingsRepository: SettingsRepository,
 
     fun changeLanguage(appLanguages: AppLanguages){
         settingsRepository.changeLanguage(appLanguages)
+    }
+
+    fun logOut() {
+        userRepository.clear()
     }
 }

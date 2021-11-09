@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.base.BaseFragment
+import com.base.biometeric.BiometricUtil
 import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
@@ -122,6 +123,12 @@ class SettingsFragment : BaseFragment() {
                 requireActivity().overridePendingTransition(0, 0)
                 requireActivity().finish()
             }
+        }
+
+
+        _binding?.textViewLogout?.setOnClickListener {
+            requireActivity().finish()
+            settingsViewModel.logOut()
         }
     }
 

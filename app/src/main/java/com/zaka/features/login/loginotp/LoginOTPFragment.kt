@@ -49,7 +49,7 @@ class LoginOTPFragment : BaseFragment() {
         _binding?.btnVerify?.setOnClickListener {
             if (getOtp().length==4)
             loginViewModel.confirmOtp(getOtp())
-            else AlertDialogManager.showAlertMessage(requireContext(),"Invalid otp ")
+            else AlertDialogManager.showAlertMessage(requireContext(),resources.getString(R.string.login_otp_error_message))
         }
 
         _binding?.textResendCode?.setOnClickListener {

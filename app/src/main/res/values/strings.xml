@@ -27,6 +27,7 @@
     <string name="login_or_hint">OR</string>
 
     <string name="login_biometric_hint">Use Your Finger To Login</string>
+    <string name="login_inputs_error_message">Please enter the required fields</string>
 
 
 
@@ -36,6 +37,8 @@
     <string name="login_otp_not_received">Didn’t Recieve the Code?</string>
     <string name="login_otp_resend">Resend Code</string>
     <string name="login_otp_verfiy">Verify</string>
+    <string name="login_otp_error_message">Invalid otp</string>
+
 
     <string name="check_your_network_connection_and_try_again">StringsRepository</string>
     <string name="timeout_error_message">timeout_error_message</string>

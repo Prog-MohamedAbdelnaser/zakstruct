@@ -160,6 +160,7 @@
             android:textColor="@color/pastel_red"
             android:textSize="16sp"
             android:padding="12dp"
+            android:id="@+id/text_view_logout"
             android:layout_marginStart="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

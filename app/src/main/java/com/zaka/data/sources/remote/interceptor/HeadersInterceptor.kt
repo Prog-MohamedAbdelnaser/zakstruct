@@ -13,7 +13,7 @@ class HeadersInterceptor(private val userRepository: UserRepository) : Intercept
     private val keyAuthorization = "authorization"
     private val keyApiKey = "apiKey"
     private val apiKeyValue = "Nas@manpoweragent"
-    private val keyLanguage = "Language"
+    private val keyLanguage = "LanguageCode"
 
     override fun intercept(chain: Interceptor.Chain): Response = chain.proceed(createNewRequestWithApiKey(chain.request()))
 

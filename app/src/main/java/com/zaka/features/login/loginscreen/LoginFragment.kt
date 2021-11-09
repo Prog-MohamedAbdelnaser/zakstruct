@@ -52,7 +52,7 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
 
         _binding?.btnLogin?.setOnClickListener {
             if(_binding?.etPassword!!.text.isNullOrEmpty()||_binding?.etUsername!!.text.isNullOrEmpty()){
-                Toast.makeText(context, "Please enter the required fields", Toast.LENGTH_SHORT)
+                Toast.makeText(context, getString(R.string.login_inputs_error_message), Toast.LENGTH_SHORT)
                     .show()
             }else{
 
