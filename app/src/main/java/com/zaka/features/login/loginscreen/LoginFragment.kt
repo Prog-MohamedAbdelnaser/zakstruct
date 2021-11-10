@@ -51,8 +51,14 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
         super.initEventHandler()
 
         _binding?.btnLogin?.setOnClickListener {
-            if(_binding?.etPassword!!.text.isNullOrEmpty()||_binding?.etUsername!!.text.isNullOrEmpty()){
+            if(_binding?.etPassword!!.text.isNullOrEmpty()&&_binding?.etUsername!!.text.isNullOrEmpty()){
                 Toast.makeText(context, getString(R.string.login_inputs_error_message), Toast.LENGTH_SHORT)
+                    .show()
+            }else if(_binding?.etUsername!!.text.isNullOrEmpty()){
+                Toast.makeText(context, getString(R.string.login_user_name_input_error_message), Toast.LENGTH_SHORT)
+                    .show()
+            }else if(_binding?.etPassword!!.text.isNullOrEmpty()){
+                Toast.makeText(context, getString(R.string.login_password_input_error_message), Toast.LENGTH_SHORT)
                     .show()
             }else{
 

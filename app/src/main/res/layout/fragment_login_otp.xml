@@ -87,6 +87,7 @@
         android:textAlignment="center"
         android:textSize="14sp"
         android:visibility="gone"
+        android:fontFamily="@font/sst_roman"
         android:textColor="@color/steel_blue"
         android:text="@string/login_otp_resend"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"

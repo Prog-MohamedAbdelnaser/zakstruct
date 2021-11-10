@@ -22,13 +22,14 @@
     <string name="login_forget_pass">Forget Password?</string>
 
     <string name="login_pass_hint">كلمة السر</string>
-    <string name="login_user_hint">إسم المستخدم</string>
+    <string name="login_user_hint">اسم المستخدم</string>
     <string name="login_btn_hint">تسجيل الدخول</string>
     <string name="login_or_hint">أو</string>
     <string name="login_biometric_hint">الدخول بالبصمة</string>
-    <string name="login_inputs_error_message">من فضلك أدخل البيانات المطلوبة</string>
+    <string name="login_inputs_error_message">الرجاء إدخال اسم مستخدم أو كلمة مرور صحيحة</string>
 
-
+    <string name="login_user_name_input_error_message">الرجاء إدخال اسم المستخدم</string>
+    <string name="login_password_input_error_message">من فضلك أدخل كلمة السر</string>
     <string name="login_otp_header">أدخل رمز التحقق</string>
     <string name="login_otp_description">تم إرسال رمز التحقق إليك عبر رسالة نصية قصيرة لرقم الجوال الذى ينتهى ب *****9895</string>
     <string name="login_otp_timer">02 : 20 secs</string>

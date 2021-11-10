@@ -15,7 +15,7 @@
     <string name="login_header_ar">هيئة الزكاة والضريبة والجمارك</string>
     <string name="login_header_en">Zakat,Tax,Customs Authority</string>
 
-    <string name="login_title">Welome back</string>
+    <string name="login_title">Welcome back</string>
     <string name="login_title_first_time">Welcome to Executives App</string>
 
     <string name="login_with_another_account">Login with another account</string>
@@ -27,7 +27,10 @@
     <string name="login_or_hint">OR</string>
 
     <string name="login_biometric_hint">Use Your Finger To Login</string>
-    <string name="login_inputs_error_message">Please enter the required fields</string>
+    <string name="login_inputs_error_message">Please enter a valid username or password</string>
+
+    <string name="login_user_name_input_error_message">Please enter your user name</string>
+    <string name="login_password_input_error_message">Please enter your password</string>
 
 
 
