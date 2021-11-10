@@ -1,5 +1,7 @@
 package com.zaka.features.login
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import com.zaka.R
 import com.zaka.data.repositories.DeviceInfoRepository
 import com.zaka.databinding.ActivityLoginBinding
 import com.zaka.databinding.ActivityMainBinding
+import com.zaka.features.main.MainActivity
 import org.koin.android.ext.android.inject
 
 class LoginActivity : BaseActivity() {
@@ -59,6 +62,10 @@ class LoginActivity : BaseActivity() {
             finish()
             return false
         }
+    }
+
+    companion object {
+        fun newIntent(context: Context?) = Intent(context, LoginActivity::class.java)
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.base.BaseFragment
 import com.base.biometeric.BiometricUtil
+import com.base.dialogs.AlertDialogManager
 import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
@@ -18,9 +19,11 @@ import com.zaka.databinding.FragmentSettingsBinding
 import com.zaka.domain.AppLanguages
 import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
+import com.zaka.features.login.LoginActivity
 import com.zaka.features.main.MainActivity
 import com.zaka.features.profile.vm.ProfileViewModel
 import com.zaka.features.settings.vm.SettingsViewModel
+import kotlinx.android.synthetic.main.dialog_logout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -127,8 +130,16 @@ class SettingsFragment : BaseFragment() {
 
 
         _binding?.textViewLogout?.setOnClickListener {
-            requireActivity().finish()
-            settingsViewModel.logOut()
+            val dialog = AlertDialogManager.createCustomViewDialog(requireContext(),R.layout.dialog_logout)
+            dialog.apply {
+                dialog_btn_no.setOnClickListener { dialog.dismiss() }
+                dialog_btn_yes.setOnClickListener {
+                    dialog.dismiss()
+                    settingsViewModel.logOut()
+                    startActivity(LoginActivity.newIntent(context).clearActivityStack())
+                    requireActivity().finish()
+                }
+            }.show()
         }
     }
 

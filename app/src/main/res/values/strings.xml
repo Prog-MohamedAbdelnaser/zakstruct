@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Executives</string>
-    <string name="common_ok">OK</string>
-    <string name="common_cancel">Cancel</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -49,8 +47,17 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="language">Language</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Log out</string>
+    <string name="logout_dialog_title">Log out?</string>
+    <string name="logout_dialog_content">Are you sure you want to log out ?</string>
+
+
     <string name="login_button">Login</string>
     <string name="unknown_error_message">unknown error!</string>
 
+
+    <string name="common_yes">Yes</string>
+    <string name="common_no">No</string>
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
 </resources>

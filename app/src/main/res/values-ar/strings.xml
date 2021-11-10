@@ -38,6 +38,8 @@
     <string name="login_otp_verfiy">تحقق</string>
     <string name="login_otp_error_message">رمز التحقق الذى أدخلته غير صحيح</string>
 
+    <string name="logout_dialog_title">تسجيل خروج؟</string>
+    <string name="logout_dialog_content">هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
 
     <string name="check_your_network_connection_and_try_again">StringsRepository</string>
     <string name="timeout_error_message">timeout_error_message</string>
@@ -48,5 +50,9 @@
     <string name="logout">تسجيل الخروج</string>
     <string name="login_button">تسجيل الدخول</string>
     <string name="unknown_error_message">unknown error!</string>
+
+
+    <string name="common_yes">نعم</string>
+    <string name="common_no">لا</string>
 
 </resources>
