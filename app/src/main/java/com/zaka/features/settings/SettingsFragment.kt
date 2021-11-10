@@ -44,7 +44,7 @@ class SettingsFragment : BaseFragment() {
 
         initObservers()
 
-        profileViewModel.fetchProfile(true)
+        profileViewModel.fetchProfile(false)
 
         settingsViewModel.fetchAppSettings()
 
@@ -70,6 +70,7 @@ class SettingsFragment : BaseFragment() {
                 showProgress()
                 _binding!!.tvUserName.text = state.data.displayName.toString()
                 _binding!!.tvUserTitle.text = state.data.jobTitle.toString()
+
             }
             is CommonState.Error->{
                 handleApiErrorWithAlert(state.exception)
