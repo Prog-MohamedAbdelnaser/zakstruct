@@ -1,5 +1,6 @@
 package com.zaka.features.login.loginotp
 
+import android.annotation.SuppressLint
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,6 +20,8 @@ import com.base.dialogs.AlertDialogManager
 import com.base.extensions.clearActivityStack
 import com.base.extensions.handleApiErrorWithAlert
 import com.zaka.R
+import com.zaka.base.extensions.hide
+import com.zaka.base.extensions.show
 import com.zaka.databinding.FragmentLoginOtpBinding
 import com.zaka.domain.UserProfile
 import com.zaka.features.common.CommonState
@@ -37,6 +40,7 @@ class LoginOTPFragment : BaseFragment() {
     private  var user: UserProfile?=null
     override fun layoutResource(): Int  = R.layout.fragment_login_otp
 
+    @SuppressLint("StringFormatInvalid")
     override fun onViewInflated(parentView: View, inflateView: View) {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginOtpBinding.bind(inflateView)
@@ -186,6 +190,17 @@ class LoginOTPFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    @SuppressLint("StringFormatInvalid")
+    private fun setMaskedPhone(phone: String) {
+        val maskedPhoneNumber ="+966" + "*".repeat(phone.length - 2) + phone.takeLast(2)
+        val localizedPhoneNumber = if (loginViewModel.getAppLanguage() == "ar")
+            "\u200E $maskedPhoneNumber"
+        else maskedPhoneNumber
+
+        _binding?.textOtpDesc?.text = getString(R.string.login_otp_description, localizedPhoneNumber)
     }
 
     companion object {

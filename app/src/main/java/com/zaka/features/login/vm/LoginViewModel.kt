@@ -118,4 +118,8 @@ private  val settingsRepository: SettingsRepository) :ViewModel() {
         _loginState.observe(lifecycleOwner,observer = observer)
     }
 
+    fun getAppLanguage():String{
+        return  settingsRepository.getLanguage()
+    }
+
 }

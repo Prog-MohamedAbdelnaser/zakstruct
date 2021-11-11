@@ -36,4 +36,9 @@ class SettingsRepository(private val  addDeviceIdAPI: SettingsAPI , private val 
     fun changeLanguage(appLanguages: AppLanguages){
         localeRepository.setLanguage(appLanguages)
     }
+
+
+    fun getLanguage():String{
+      return  localeRepository.getLanguage()
+    }
 }
