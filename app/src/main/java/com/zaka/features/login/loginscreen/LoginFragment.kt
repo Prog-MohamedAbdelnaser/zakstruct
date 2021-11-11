@@ -147,7 +147,8 @@ class LoginFragment : BaseFragment(), BiometricAuthListener {
             CommonState.LoadingShow -> showProgressDialog()
             CommonState.LoadingFinished -> hideProgressDialog()
             is CommonState.Success -> {
-                findNavController().navigate(R.id.loginOTPFragment)
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToLoginOTPFragment(user?.phone))
+               // findNavController().navigate(R.id.loginOTPFragment)
             }
             is CommonState.Error -> {
                 handleApiErrorWithAlert(state.exception)

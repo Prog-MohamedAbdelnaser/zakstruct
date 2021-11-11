@@ -21,5 +21,7 @@
         android:id="@+id/loginOTPFragment"
         android:name="com.zaka.features.login.loginotp.LoginOTPFragment"
         android:label="LoginOTPFragment"
-        tools:layout="@layout/fragment_login_otp"/>
+        tools:layout="@layout/fragment_login_otp">
+        <argument android:name="phoneNumber" app:nullable="true" app:argType="string" />
+    </fragment>
 </navigation>

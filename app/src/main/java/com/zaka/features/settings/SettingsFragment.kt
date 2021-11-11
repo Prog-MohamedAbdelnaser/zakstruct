@@ -44,7 +44,7 @@ class SettingsFragment : BaseFragment() {
 
         initObservers()
 
-        profileViewModel.fetchProfile(false)
+        profileViewModel.fetchProfile(true)
 
         settingsViewModel.fetchAppSettings()
 
@@ -67,7 +67,6 @@ class SettingsFragment : BaseFragment() {
             CommonState.LoadingShow -> showProgress()
             CommonState.LoadingFinished -> hideProgress()
             is CommonState.Success -> {
-                showProgress()
                 _binding!!.tvUserName.text = state.data.displayName.toString()
                 _binding!!.tvUserTitle.text = state.data.jobTitle.toString()
 

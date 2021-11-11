@@ -34,6 +34,8 @@
 
     <string name="login_otp_header">Enter OTP</string>
     <string name="login_otp_description">OTP code has been sent to you via SMS for the mobile number that ends with %s</string>
+    <string name="otp_sent_to_phone">OTP code has been sent to you via SMS for the mobile number </string>
+
     <string name="login_otp_timer">02 : 20 secs</string>
     <string name="login_otp_not_received">Didn’t Recieve the Code?</string>
     <string name="login_otp_resend">Resend Code</string>

@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import com.base.BaseFragment
 import com.base.dialogs.AlertDialogManager
 import com.base.extensions.clearActivityStack
@@ -32,21 +33,28 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import java.util.*
 
 class LoginOTPFragment : BaseFragment() {
 
     private val loginViewModel:LoginViewModel by viewModel()
     private var _binding: FragmentLoginOtpBinding? = null
     private  var user: UserProfile?=null
+    private val loginOTPFragmentArgs :LoginOTPFragmentArgs by navArgs()
+
     override fun layoutResource(): Int  = R.layout.fragment_login_otp
 
     @SuppressLint("StringFormatInvalid")
     override fun onViewInflated(parentView: View, inflateView: View) {
         super.onViewInflated(parentView, inflateView)
         _binding=FragmentLoginOtpBinding.bind(inflateView)
+        if (loginOTPFragmentArgs.phoneNumber!=null){
+            setMaskedPhone (loginOTPFragmentArgs.phoneNumber!!)
+        }
         initEventHandler()
         startResendCounter()
     }
+
 
     override fun initEventHandler() {
         super.initEventHandler()
@@ -84,7 +92,7 @@ class LoginOTPFragment : BaseFragment() {
     fun checkOtp(){
         _binding?.includedOtp?.d1?.addTextChangedListener {
             _binding?.includedOtp?.d1?.isSelected = it.toString().isNotEmpty()
-            if (it.toString()?.isEmpty()){
+            if (it.toString().isEmpty()){
 
             }else {
                 _binding?.includedOtp?.d2?.requestFocus()
@@ -123,7 +131,7 @@ class LoginOTPFragment : BaseFragment() {
 
         _binding?.includedOtp?.d2?.addTextChangedListener {
 
-            if (it.toString()?.isEmpty()){
+            if (it.toString().isEmpty()){
             //    _binding?.includedOtp?.d1?.requestFocus()
             }else {
                 _binding?.includedOtp?.d3?.requestFocus()
@@ -131,7 +139,7 @@ class LoginOTPFragment : BaseFragment() {
             _binding?.includedOtp?.d2?.isSelected = it.toString().isNotEmpty()
         }
         _binding?.includedOtp?.d3?.addTextChangedListener {
-            if (it.toString()?.isEmpty()){
+            if (it.toString().isEmpty()){
                // _binding?.includedOtp?.d2?.requestFocus()
             }else{
             _binding?.includedOtp?.d4?.requestFocus()
@@ -140,7 +148,7 @@ class LoginOTPFragment : BaseFragment() {
             _binding?.includedOtp?.d3?.isSelected = it.toString().isNotEmpty()
         }
         _binding?.includedOtp?.d4?.addTextChangedListener {
-            if (it.toString()?.isEmpty()){
+            if (it.toString().isEmpty()){
               //  _binding?.includedOtp?.d3?.requestFocus()
             }
             _binding?.includedOtp?.d4?.isSelected = it.toString().isNotEmpty()
@@ -195,12 +203,13 @@ class LoginOTPFragment : BaseFragment() {
 
     @SuppressLint("StringFormatInvalid")
     private fun setMaskedPhone(phone: String) {
+        Locale.getDefault().language
         val maskedPhoneNumber ="+966" + "*".repeat(phone.length - 2) + phone.takeLast(2)
-        val localizedPhoneNumber = if (loginViewModel.getAppLanguage() == "ar")
+        val localizedPhoneNumber = if (Locale.getDefault().language == "ar")
             "\u200E $maskedPhoneNumber"
         else maskedPhoneNumber
 
-        _binding?.textOtpDesc?.text = getString(R.string.login_otp_description, localizedPhoneNumber)
+        _binding?.textOtpDesc?.text = getString(R.string.otp_sent_to_phone, localizedPhoneNumber)
     }
 
     companion object {
